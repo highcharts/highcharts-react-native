@@ -332,8 +332,8 @@ A callback function for the created chart. First argument for the function will 
 Clone github repository and install dependencies:
 
 ```bash
-git clone https://github.com/highcharts/highcharts-react-native-officail
-cd highcharts-react-native-official
+git clone https://github.com/highcharts/highcharts-react-native
+cd highcharts-react-native
 npm install
 ```
 
@@ -344,7 +344,3 @@ npm install
 [Technical support](https://www.highcharts.com/support) will help you with Highcharts and with the wrapper.
 
 If you have a bug to report or an enhancement suggestion please submit [Issues](https://github.com/highcharts/highcharts-react-native-official/issues) in this repository.
-
-### Why highcharts-react-official and not highcharts-react is used?
-
-The NPM package is registered as `highcharts-react-native-official` because `highcharts-react-native` was already taken.
