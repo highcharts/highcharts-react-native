@@ -1,7 +1,18 @@
 {
-  "name": "empty-project-template",
+  "name": "highcharts-react-native-official",
+  "version": "0.1",
   "main": "node_modules/expo/AppEntry.js",
-  "private": true,
+  "license": "SEE LICENSE IN <LICENSE>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highcharts/highcharts-react-native-official.git"
+  },
+  "keywords": [
+    "highcharts",
+    "highstock",
+    "highmaps",
+    "react-native"
+  ],
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
