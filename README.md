@@ -20,7 +20,6 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React.
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
-    2. [Why highcharts-react-official and not highcharts-react is used?](#why-highcharts-react-official-and-not-highcharts-react-is-used)
 
 ## Getting Started
 
@@ -39,7 +38,7 @@ Tested and required versions:
 Get package from NPM in your React app:
 
 ```bash
-npm install highcharts-react-native-official
+npm install @highcharts/highcharts-react-native
 ```
 
 ### Using
@@ -343,4 +342,4 @@ npm install
 
 [Technical support](https://www.highcharts.com/support) will help you with Highcharts and with the wrapper.
 
-If you have a bug to report or an enhancement suggestion please submit [Issues](https://github.com/highcharts/highcharts-react-native-official/issues) in this repository.
+If you have a bug to report or an enhancement suggestion please submit [Issues](https://github.com/highcharts/highcharts-react-native/issues) in this repository.
