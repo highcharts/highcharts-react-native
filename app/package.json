@@ -1,0 +1,44 @@
+{
+  "name": "@highcharts/highcharts-react-native",
+  "version": "0.0.3",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highcharts/highcharts-react-native-official.git"
+  },
+  "keywords": [
+    "highcharts",
+    "highstock",
+    "highmaps",
+    "react-native"
+  ],
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "eslint-config-eslint": "^5.0.1",
+    "eslint-plugin-node": "^8.0.1",
+    "expo": "^30.0.1",
+    "i": "^0.3.6",
+    "npm": "^6.9.0",
+    "react": "16.4",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
+    "react-native-cache-image": "^1.0.0",
+    "react-native-fs": "^2.13.3",
+    "url-parse": "^1.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "highcharts": "^7.1.0",
+    "react": "^16.4.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.4.0",
+    "react-test-renderer": "^16.4.0",
+    "react-unit": "^3.0.0"
+  }
+}
