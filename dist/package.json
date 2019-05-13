@@ -1,0 +1,24 @@
+{
+  "name": "@highcharts/highcharts-react-native",
+  "version": "0.0.5",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highcharts/highcharts-react-native-official.git"
+  },
+  "keywords": [
+    "highcharts",
+    "highstock",
+    "highmaps",
+    "react-native"
+  ],
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "react": "^16.4.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.4.0",
+    "react-test-renderer": "^16.4.0",
+    "react-unit": "^3.0.0"
+  }
+}
