@@ -53,10 +53,7 @@ Import into your React Native project and render a chart:
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
-    Text,
-    View,
-    Button
+    View
 } from 'react-native';
 import HighchartsReactNative from '@highcharts/HighchartsReactNative';
 
@@ -99,10 +96,7 @@ const styles = StyleSheet.create({
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
-    Text,
-    View,
-    Button
+    View
 } from 'react-native';
 import HighchartsReactNative from '@highcharts/HighchartsReactNative';
 
@@ -158,10 +152,7 @@ const styles = StyleSheet.create({
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
-    Text,
-    View,
-    Button
+    View
 } from 'react-native';
 import HighchartsReactNative from '@highcharts/HighchartsReactNative';
 
@@ -215,8 +206,6 @@ A good practice is to keep all chart options in the state. When `setState` is ca
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
-    Text,
     View,
     Button
 } from 'react-native';
@@ -333,6 +322,7 @@ Clone github repository and install dependencies:
 ```bash
 git clone https://github.com/highcharts/highcharts-react-native
 cd highcharts-react-native
+npm install -g expo-cli
 npm install
 expo start
 ```
