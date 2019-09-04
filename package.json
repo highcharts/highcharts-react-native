@@ -1,5 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "name": "highcharts-react-native",
+  "version": "0.0.0",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -7,6 +9,26 @@
     "web": "expo start --web",
     "eject": "expo eject"
   },
+  "description": "Highcharts react native wrapper",
+  "license": "SEE LICENSE IN <LICENSE>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/highcharts/highcharts-react-native-official.git"
+  },
+  "keywords": [
+    "highcharts",
+    "highstock",
+    "highmaps",
+    "react-native"
+  ],
+  "author": "Highcharts",
+  "bugs": {
+    "url": "https://github.com/highcharts/highcharts-react-native"
+  },
+  "contributors": [
+    "Sebastian Bochan <sebastian@blacklabel.pl>"
+  ],
+  "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "dependencies": {
     "@highcharts/highcharts-react-native": "^1.0.0",
     "expo": "^33.0.0",
