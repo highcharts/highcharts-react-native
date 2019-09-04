@@ -1,12 +1,11 @@
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
     Text,
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/highcharts-react-native';
+import HighchartsReactNative from './dist/src/HighchartsReactNative';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -15,7 +14,7 @@ export default class App extends React.Component {
         this.state = {
             chartOptions: {
                 series: [{
-                    data: [1, 3, 2]
+                    data: [1, 5, 2]
                 }]
             }
         };
@@ -25,6 +24,7 @@ export default class App extends React.Component {
         return (
             <View>
                 <HighchartsReactNative
+                
                     styles={styles.container}
                     options={this.state.chartOptions}
                 />
