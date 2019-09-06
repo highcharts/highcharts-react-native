@@ -17,7 +17,7 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React.
     2. [styles](#styles)
     3. [modules](#modules)
     4. [callback](#callback)
-3. [Get app demo](#get-app-demo)
+3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
 
@@ -35,7 +35,7 @@ Tested and required versions:
 
 ### Installing
 
-Get package from NPM in your React Native app:
+Get package from NPM in your React app:
 
 ```bash
 npm install @highcharts/highcharts-react-native
@@ -53,9 +53,12 @@ Import into your React Native project and render a chart:
 import React from 'react';
 import {
     StyleSheet,
-    View
+    WebView,
+    Text,
+    View,
+    Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from './src/HighchartsReactNative';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -64,7 +67,7 @@ export default class App extends React.Component {
         this.state = {
             chartOptions: {
                 series: [{
-                    data: [1, 3, 2]
+                    data: [1, 2, 3]
                 }]
             }
         };
@@ -96,9 +99,12 @@ const styles = StyleSheet.create({
 import React from 'react';
 import {
     StyleSheet,
-    View
+    WebView,
+    Text,
+    View,
+    Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from './src/HighchartsReactNative';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -152,9 +158,12 @@ const styles = StyleSheet.create({
 import React from 'react';
 import {
     StyleSheet,
-    View
+    WebView,
+    Text,
+    View,
+    Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from './src/HighchartsReactNative';
 
 const modules = [
     'highcharts-more',
@@ -206,10 +215,12 @@ A good practice is to keep all chart options in the state. When `setState` is ca
 import React from 'react';
 import {
     StyleSheet,
+    WebView,
+    Text,
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from './src/HighchartsReactNative';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -315,16 +326,14 @@ and set the parameter.
 
 A callback function for the created chart. First argument for the function will hold the created `chart`. Default `this` in the function points to the `chart`. This option is optional.
 
-## Get app demo
+## Get repository
 
 Clone github repository and install dependencies:
 
 ```bash
 git clone https://github.com/highcharts/highcharts-react-native
 cd highcharts-react-native
-npm install -g expo-cli
 npm install
-expo start
 ```
 
 ## FAQ

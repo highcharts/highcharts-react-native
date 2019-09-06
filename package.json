@@ -1,15 +1,6 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
-  "name": "highcharts-react-native",
-  "version": "0.0.0",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject"
-  },
-  "description": "Highcharts react native wrapper",
+  "name": "@highcharts/highcharts-react-native",
+  "version": "1.0.0",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
@@ -21,7 +12,7 @@
     "highmaps",
     "react-native"
   ],
-  "author": "Highcharts",
+  "description": "Highcharts react native wrapper",
   "bugs": {
     "url": "https://github.com/highcharts/highcharts-react-native"
   },
@@ -29,17 +20,14 @@
     "Sebastian Bochan <sebastian@blacklabel.pl>"
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
-  "dependencies": {
-    "@highcharts/highcharts-react-native": "^1.0.0",
-    "expo": "^33.0.0",
-    "react": "16.8.3",
-    "react-dom": "^16.8.6",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
-    "react-native-web": "^0.11.4",
-    "react-native-webview": "^5.12.0"
-  },
+  "author": "Highcharts",
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
-  },
-  "private": true
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.12.4",
+    "react": "^16.4.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.4.0",
+    "react-test-renderer": "^16.4.0",
+    "react-unit": "^3.0.0"
+  }
 }
