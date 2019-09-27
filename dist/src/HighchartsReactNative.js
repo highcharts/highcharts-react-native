@@ -3,13 +3,14 @@ import {
     Text,
     View,
     Dimensions,
-    StyleSheet
+    StyleSheet,
+    Platform
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 const win = Dimensions.get('window');
 const path = '../highcharts-files/';
-const highchartsLayout = require('../highcharts-layout/index.html');
+const highchartsLayout = (Platform.OS == 'ios') ? require('../highcharts-layout/index.html') : { uri: 'file:///android_asset/highcharts-layout/index.html' }
 
 export default class HighchartsReactNative extends React.PureComponent {
     constructor(props) {
@@ -34,9 +35,11 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
     componentDidUpdate() {
         // send options for chart.update() as string to webview
-        this.webView.postMessage(
-            this.serialize(this.props.options, true)
-        );
+        if (this.webView) {
+            this.webView.postMessage(
+                this.serialize(this.props.options, true)
+            );
+        }
     }
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
@@ -105,7 +108,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         >
 
             <WebView
-                ref={this._webViewRef}
+                ref={(webView) => this.webView = webView}
                 source={highchartsLayout}
                 injectedJavaScript={runFirst}
                 originWhitelist={["*"]}
