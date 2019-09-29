@@ -1,5 +1,5 @@
 # Highcharts React Native
-Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React.
+Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
 ## Table of Contents
 1. [Getting started](#getting-started)
@@ -55,7 +55,7 @@ import {
     StyleSheet,
     View
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -98,7 +98,7 @@ import {
     StyleSheet,
     View
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -154,7 +154,7 @@ import {
     StyleSheet,
     View
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native';
 
 const modules = [
     'highcharts-more',
@@ -209,7 +209,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native';
 
 export default class App extends React.Component {
     constructor(props) {
