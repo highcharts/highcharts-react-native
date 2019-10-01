@@ -7,6 +7,10 @@ import {
 } from 'react-native';
 import HighchartsReactNative from './dist/src/HighchartsReactNative';
 
+const modules = [
+    //'solid-gauge'
+];
+
 export default class App extends React.Component {
     constructor(props) {
         super(props);
@@ -14,8 +18,12 @@ export default class App extends React.Component {
         this.state = {
             chartOptions: {
                 series: [{
-                    data: [1, 5, 2]
-                }]
+                    name: 'Speed',
+                    data: [1, 2, 3]
+                }],
+                chart: {
+                    type: 'line'
+                }
             }
         };
     }
@@ -24,9 +32,10 @@ export default class App extends React.Component {
         return (
             <View>
                 <HighchartsReactNative
-                
+                    //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
+                    //modules={modules}
                 />
             </View>
         );
