@@ -1,4 +1,5 @@
 {
+  "main": "node_modules/expo/AppEntry.js",
   "name": "@highcharts/highcharts-react-native",
   "version": "1.0.0",
   "license": "SEE LICENSE IN <LICENSE>",
