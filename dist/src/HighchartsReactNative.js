@@ -37,12 +37,8 @@ export default class HighchartsReactNative extends React.PureComponent {
         });
     }
     componentDidUpdate() {
-        // send options for chart.update() as string to webview
-        if (this.webView) {
-            this.webView.postMessage(
-                this.serialize(this.props.options, true)
-            );
-        }
+        const { webview } = this.refs;
+        webview.postMessage(this.serialize(this.props.options, true));
     }
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
@@ -138,7 +134,8 @@ export default class HighchartsReactNative extends React.PureComponent {
         >
 
             <WebView
-                ref={(webView) => this.webView = webView}
+                ref = "webview"
+                //ref={(webView) => this.webView = webView}
                 source={highchartsLayout}
                 injectedJavaScript={runFirst}
                 originWhitelist={["*"]}

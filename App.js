@@ -28,9 +28,26 @@ export default class App extends React.Component {
         };
     }
 
+    chartUpdate() {
+        alert('click');
+        this.setState({
+            chartOptions: {
+                title: {
+                    text: 'Updated chart'
+                }
+            }
+        });
+    }
+
     render() {
         return (
-            <View>
+            <View>              
+                <Button
+                    onPress={this.chartUpdate.bind(this)}
+                    style={styles.button}
+                    title='Chart update button'
+                    color='red'
+                />
                 <HighchartsReactNative
                     //useCDN={true}
                     styles={styles.container}
@@ -44,7 +61,9 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
+        justifyContent: 'center'
+    },
+    button: {
         justifyContent: 'center'
     }
 });
