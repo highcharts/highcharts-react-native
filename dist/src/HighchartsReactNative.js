@@ -26,21 +26,32 @@ export default class HighchartsReactNative extends React.PureComponent {
 
         // create script tag and apply all references
         this.addHighchartsScripts = this.addHighchartsScripts.bind(this);
-
-        // catch rotation event
-        Dimensions.addEventListener('change', () => {
-            this.setState({
-                width: userStyles.width || Dimensions.get('window').width,
-                height: userStyles.height || Dimensions.get('window').height
-            });
-        });
-    }
+		this.onRotate = this.onRotate.bind(this);
+	}
+	
     componentDidUpdate() {
         // send options for chart.update() as string to webview
         this.webView.postMessage(
             this.serialize(this.props.options, true)
         );
-    }
+	}
+	
+	componentDidMount() {
+		// catch rotation event
+		Dimensions.addEventListener('change', this.onRotate);
+	}
+
+    componentWillUnmount() {
+		Dimensions.removeEventListener('change', this.onRotate);
+	}
+	
+	onRotate() {
+		this.setState({
+			width: userStyles.width || Dimensions.get('window').width,
+			height: userStyles.height || Dimensions.get('window').height,
+		});
+	}
+    
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
      * is not wrapped in quotes.
