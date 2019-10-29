@@ -46,12 +46,12 @@ export default class HighchartsReactNative extends React.PureComponent {
      * is not wrapped in quotes.
      */
     serialize(chartOptions, isUpdate) {
-        var hcFunctions = {},
+        let hcFunctions = {},
             serializedOptions,
             i = 0;
 
         serializedOptions = JSON.stringify(chartOptions, function (val, key) {
-            var fcId = '###HighchartsFunction' + i + '###';
+            let fcId = '###HighchartsFunction' + i + '###';
 
             // set reference to function for the later replacement
             if (typeof key === 'function') {

@@ -3,12 +3,11 @@ const hcUtils = {
     parseOptions: function (chartOptions) {
         const parseFunction = this.parseFunction;
 
-        var options = JSON.parse(chartOptions, function (val, key) {
+        let options = JSON.parse(chartOptions, function (val, key) {
             if (typeof key === 'string' && key.indexOf('function') > -1) {
                 return parseFunction(key);
-            } else {
-                return key;
             }
+            return key;
         });
 
         return options;
@@ -16,7 +15,7 @@ const hcUtils = {
     // convert funtion string to function
     parseFunction: function (fc) {
 
-        var fcArgs = fc.match(/\((.*?)\)/)[1],
+        let fcArgs = fc.match(/\((.*?)\)/)[1],
             fcbody = fc.split('{');
 
         return new Function(fcArgs, '{' + fcbody.slice(1).join('{'));
