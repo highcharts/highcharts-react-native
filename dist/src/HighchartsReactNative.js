@@ -11,7 +11,7 @@ const win = Dimensions.get('window');
 const path = '../highcharts-files/';
 const highchartsLayout = require('../highcharts-layout/index.html');
 
-export default class HighchartsReactNative extends React.PureComponent {
+class HighchartsReactNative extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -119,7 +119,13 @@ export default class HighchartsReactNative extends React.PureComponent {
         `;
     }
     render() {
-        // Create container for the chart
+		const {
+			originWhitelist, automaticallyAdjustContentInsets, allowFileAccess,
+			javaScriptEnabled, domStorageEnabled, scalesPageToFit,
+			scrollEnabled, mixedContentMode,
+		} = this.props;
+
+		// Create container for the chart
         return <View style={[
             this.props.styles,
             { width: this.state.width, height: this.state.height }
@@ -129,15 +135,28 @@ export default class HighchartsReactNative extends React.PureComponent {
                 ref={(webView) => this.webView = webView}
                 source={highchartsLayout}
                 injectedJavaScript={this.addHighchartsScripts()}
-                originWhitelist={["*"]}
-                automaticallyAdjustContentInsets={true}
-                allowFileAccess={true}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                scalesPageToFit={true}
-                scrollEnabled={false}
-                mixedContentMode='always'
+                originWhitelist={originWhitelist}
+                automaticallyAdjustContentInsets={automaticallyAdjustContentInsets}
+                allowFileAccess={allowFileAccess}
+                javaScriptEnabled={javaScriptEnabled}
+                domStorageEnabled={domStorageEnabled}
+                scalesPageToFit={scalesPageToFit}
+                scrollEnabled={scrollEnabled}
+                mixedContentMode={mixedContentMode}
             />
         </View>;
     }
 }
+
+HighchartsReactNative.defaultProps = {
+	originWhitelist: ["*"],
+	automaticallyAdjustContentInsets: true,
+	allowFileAccess: true,
+	javaScriptEnabled: true,
+	domStorageEnabled: true,
+	scalesPageToFit: true,
+	scrollEnabled: false,
+	mixedContentMode: 'always',
+};
+
+export default HighchartsReactNative;
