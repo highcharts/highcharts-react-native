@@ -1,5 +1,5 @@
 # Highcharts React Native
-Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React.
+Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
 ## Table of Contents
 1. [Getting started](#getting-started)
