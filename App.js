@@ -19,7 +19,7 @@ export default class App extends React.Component {
             chartOptions: {
                 series: [{
                     name: 'Speed',
-                    data: [1, 2, 3]
+                    data: [1, 10, 3]
                 }],
                 chart: {
                     type: 'line'
@@ -41,17 +41,12 @@ export default class App extends React.Component {
     render() {
         return (
             <View>              
-                <Button
-                    onPress={this.chartUpdate.bind(this)}
-                    style={styles.button}
-                    title='Chart update button'
-                    color='red'
-                />
+                
                 <HighchartsReactNative
                     //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
-                    useSSL={true}
+                    //useSSL={true}
                     //modules={modules}
                 />
             </View>

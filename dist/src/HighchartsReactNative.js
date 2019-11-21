@@ -80,7 +80,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         return serializedOptions;
     }
     render() {
-        const scriptsPath = httpProto + (this.state.useCDN ? cdnPath : path);
+        const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
         const runFirst = `
            
            var modulesList = ${JSON.stringify(this.state.modules)};
@@ -112,8 +112,8 @@ export default class HighchartsReactNative extends React.PureComponent {
               xhttp.send();
             }
 
-
             loadScripts('highcharts', function () {
+
                 var redraw = modulesList.length > 0 ? false : true;
 
                 loadScripts('highcharts-more', function () {
@@ -137,7 +137,6 @@ export default class HighchartsReactNative extends React.PureComponent {
             { width: this.state.width, height: this.state.height }
         ]}
         >
-
             <WebView
                 ref = "webview"
                 source={highchartsLayout}
