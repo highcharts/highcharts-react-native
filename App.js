@@ -29,7 +29,6 @@ export default class App extends React.Component {
     }
 
     chartUpdate() {
-        alert('click');
         this.setState({
             chartOptions: {
                 title: {
@@ -52,6 +51,7 @@ export default class App extends React.Component {
                     //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
+                    useSSL={true}
                     //modules={modules}
                 />
             </View>

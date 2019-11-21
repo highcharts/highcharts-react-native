@@ -9,13 +9,18 @@ import {
 import { WebView } from 'react-native-webview';
 
 const win = Dimensions.get('window');
-const cdnPath = 'http://code.highcharts.com/';
+const cdnPath = 'code.highcharts.com/';
 const path = '../highcharts-files/';
 const highchartsLayout = (Platform.OS == 'ios') ? require('../highcharts-layout/index.html') : { uri: 'file:///android_asset/highcharts-layout/index.html' }
+const httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        if (props.useSSL) {
+            httpProto = 'https://';
+        }
 
         // extract width and height from user styles
         const userStyles = StyleSheet.flatten(this.props.styles);
@@ -75,7 +80,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         return serializedOptions;
     }
     render() {
-        const scriptsPath = this.state.useCDN ? cdnPath : path;
+        const scriptsPath = httpProto + (this.state.useCDN ? cdnPath : path);
         const runFirst = `
            
            var modulesList = ${JSON.stringify(this.state.modules)};
@@ -135,7 +140,6 @@ export default class HighchartsReactNative extends React.PureComponent {
 
             <WebView
                 ref = "webview"
-                //ref={(webView) => this.webView = webView}
                 source={highchartsLayout}
                 injectedJavaScript={runFirst}
                 originWhitelist={["*"]}
@@ -146,6 +150,7 @@ export default class HighchartsReactNative extends React.PureComponent {
                 useWebKit={true}
                 scrollEnabled={false}
                 mixedContentMode='always'
+                allowFileAccessFromFileURLs={true}
             />
         </View>;
     }
