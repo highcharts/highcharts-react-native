@@ -34,16 +34,24 @@ export default class HighchartsReactNative extends React.PureComponent {
         };
 
         // catch rotation event
-        Dimensions.addEventListener('change', () => {
-            this.setState({
-                width: userStyles.width || Dimensions.get('window').width,
-                height: userStyles.height || Dimensions.get('window').height
-            });
-        });
+        this.onRotate = this.onRotate.bind(this);
     }
     componentDidUpdate() {
         const { webview } = this.refs;
         webview.postMessage(this.serialize(this.props.options, true));
+    }
+    componentDidMount() {
+        // catch rotation event
+        Dimensions.addEventListener('change', this.onRotate);
+    }
+    componentWillUnmount() {
+        Dimensions.removeEventListener('change', this.onRotate);
+    }
+    onRotate() {
+        this.setState({
+            width: userStyles.width || Dimensions.get('window').width,
+            height: userStyles.height || Dimensions.get('window').height,
+        });
     }
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
