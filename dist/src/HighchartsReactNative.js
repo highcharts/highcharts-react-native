@@ -12,7 +12,7 @@ const win = Dimensions.get('window');
 const cdnPath = 'code.highcharts.com/';
 const path = '../highcharts-files/';
 const highchartsLayout = (Platform.OS == 'ios') ? require('../highcharts-layout/index.html') : { uri: 'file:///android_asset/highcharts-layout/index.html' }
-const httpProto = 'http://';
+let httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
     constructor(props) {
