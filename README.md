@@ -62,7 +62,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -108,7 +108,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -167,7 +167,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 const modules = [
     'highcharts-more',
@@ -224,7 +224,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
     constructor(props) {
