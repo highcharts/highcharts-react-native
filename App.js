@@ -1,12 +1,15 @@
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
     Text,
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/highcharts-react-native';
+import HighchartsReactNative from './dist/src/HighchartsReactNative';
+
+const modules = [
+    //'solid-gauge'
+];
 
 export default class App extends React.Component {
     constructor(props) {
@@ -15,18 +18,36 @@ export default class App extends React.Component {
         this.state = {
             chartOptions: {
                 series: [{
-                    data: [1, 3, 2]
-                }]
+                    name: 'Speed',
+                    data: [1, 10, 3]
+                }],
+                chart: {
+                    type: 'line'
+                }
             }
         };
     }
 
+    chartUpdate() {
+        this.setState({
+            chartOptions: {
+                title: {
+                    text: 'Updated chart'
+                }
+            }
+        });
+    }
+
     render() {
         return (
-            <View>
+            <View>              
+                
                 <HighchartsReactNative
+                    //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
+                    //useSSL={true}
+                    //modules={modules}
                 />
             </View>
         );
@@ -35,7 +56,9 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff',
+        justifyContent: 'center'
+    },
+    button: {
         justifyContent: 'center'
     }
 });

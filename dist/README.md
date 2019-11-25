@@ -1,5 +1,5 @@
 # Highcharts React Native
-Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React.
+Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
 ## Table of Contents
 1. [Getting started](#getting-started)
@@ -17,9 +17,13 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React.
     2. [styles](#styles)
     3. [modules](#modules)
     4. [callback](#callback)
+    5. [useSSL](#useSSL)
+    6. [useCDN](#useCDN)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
+    2. [Files are not loaded](#files-are-not-loaded)
+    3. [Error loading page](#error-loading-page)
 
 ## Getting Started
 
@@ -300,6 +304,8 @@ Available options:
     options={this.state.chartOptions}
     modules={modules}
     callback={chartCallback}
+    useSSL={true}
+    useCDN={true}
   />
 ```
 
@@ -326,6 +332,14 @@ and set the parameter.
 
 A callback function for the created chart. First argument for the function will hold the created `chart`. Default `this` in the function points to the `chart`. This option is optional.
 
+### useCDN
+
+Set the flag as true, if you would like to load files (i.e highcharts.js) from CDN instead of local file system.
+
+### useSSL
+
+Set the flag as true, if you would like to load files (i.e highcharts.js) by SSL. (The useCDN flag is mandatory).
+
 ## Get repository
 
 Clone github repository and install dependencies:
@@ -343,3 +357,12 @@ npm install
 [Technical support](https://www.highcharts.com/support) will help you with Highcharts and with the wrapper.
 
 If you have a bug to report or an enhancement suggestion please submit [Issues](https://github.com/highcharts/highcharts-react-native/issues) in this repository.
+
+### Files are not loaded
+1. Put the files (i.e. Folder: highcharts-layout and highcharts-files) to `android/app/src/main/assets` and `/ios`
+
+2. Use release mode instead of debug mode
+run `react-native run-android --variant=release`
+
+### Error loading page
+In the `package.json` remove the `"main": "node_modules/expo/AppEntry.js"` line.

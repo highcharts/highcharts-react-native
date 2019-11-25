@@ -1,6 +1,6 @@
 {
   "name": "@highcharts/highcharts-react-native",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
@@ -12,6 +12,15 @@
     "highmaps",
     "react-native"
   ],
+  "description": "Highcharts react native wrapper",
+  "bugs": {
+    "url": "https://github.com/highcharts/highcharts-react-native"
+  },
+  "contributors": [
+    "Sebastian Bochan <sebastian@blacklabel.pl>"
+  ],
+  "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
+  "author": "Highcharts",
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",

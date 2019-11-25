@@ -1,19 +1,26 @@
 import React from 'react';
 import {
-    WebView,
     Text,
     View,
     Dimensions,
-    StyleSheet
+    StyleSheet,
+    Platform
 } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 const win = Dimensions.get('window');
+const cdnPath = 'code.highcharts.com/';
 const path = '../highcharts-files/';
-const highchartsLayout = require('../highcharts-layout/index.html');
+const highchartsLayout = (Platform.OS == 'ios') ? require('../highcharts-layout/index.html') : { uri: 'file:///android_asset/highcharts-layout/index.html' }
+const httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        if (props.useSSL) {
+            httpProto = 'https://';
+        }
 
         // extract width and height from user styles
         const userStyles = StyleSheet.flatten(this.props.styles);
@@ -21,11 +28,10 @@ export default class HighchartsReactNative extends React.PureComponent {
         this.state = {
             width: userStyles.width || win.width,
             height: userStyles.height || win.height,
-            chartOptions: this.props.options
+            chartOptions: this.props.options,
+            useCDN: this.props.useCDN || false,
+            modules: this.props.modules && this.props.modules.toString() || []
         };
-
-        // create script tag and apply all references
-        this.addHighchartsScripts = this.addHighchartsScripts.bind(this);
 
         // catch rotation event
         Dimensions.addEventListener('change', () => {
@@ -36,10 +42,8 @@ export default class HighchartsReactNative extends React.PureComponent {
         });
     }
     componentDidUpdate() {
-        // send options for chart.update() as string to webview
-        this.webView.postMessage(
-            this.serialize(this.props.options, true)
-        );
+        const { webview } = this.refs;
+        webview.postMessage(this.serialize(this.props.options, true));
     }
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
@@ -75,50 +79,58 @@ export default class HighchartsReactNative extends React.PureComponent {
 
         return serializedOptions;
     }
-    // Create <scripts> with references to highcharts files
-    addHighchartsScripts() {
-        const highchartsInit = `
-                Highcharts.chart(
-                'container',
-                ${this.serialize(this.props.options)},
-                ${this.serialize(this.props.callback)}
-                )
-            `;
-
-        return `
-            var modules = ${this.serialize(this.props.modules) || '[]'},
-                moduleCounter = modules.length,
-                hcScript;
-
-            hcScript = document.createElement('script');
-
-            hcScript.setAttribute('src', '${path}highcharts.js');
-            hcScript.onload = function() {
-
-                if (moduleCounter === 0) {
-                    ${highchartsInit}
-                } else {
-                    modules.forEach(function(scr) {
-
-                        var moduleScript = document.createElement('script');
-
-                        moduleScript.setAttribute('src', '${path}' + scr + '.js');
-                        moduleScript.onload = function() {
-
-                            moduleCounter--;
-
-                            if (moduleCounter === 0) {
-                              ${highchartsInit}
-                            }
-                        };
-                        document.body.appendChild(moduleScript);
-                    });
-                };
-            };
-            document.body.appendChild(hcScript);
-        `;
-    }
     render() {
+        const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
+        const runFirst = `
+           
+           var modulesList = ${JSON.stringify(this.state.modules)};
+
+           if (modulesList.length > 0) {
+              modulesList = modulesList.split(',');
+           }
+
+           function loadScripts(file, callback, redraw, isModule) {
+
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    
+                    var hcScript = document.createElement('script');
+                    hcScript.innerHTML = this.responseText;
+                    document.body.appendChild(hcScript);
+
+                    if (callback) {
+                        callback.call();
+                    }
+
+                    if (redraw) {
+                        Highcharts.chart("container", ${this.serialize(this.props.options)});
+                    }
+                }
+              };
+              xhttp.open("GET", '${scriptsPath}' + (isModule ? 'modules/' + file : file) + '.js', true);
+              xhttp.send();
+            }
+
+            loadScripts('highcharts', function () {
+
+                var redraw = modulesList.length > 0 ? false : true;
+
+                loadScripts('highcharts-more', function () {
+                    if (modulesList.length > 0) {
+                        for (var i = 0; i < modulesList.length; i++) {
+                            if (i === (modulesList.length - 1)) {
+                                redraw = true;
+                            } else {
+                                redraw = false;
+                            }
+                            loadScripts(modulesList[i], undefined, redraw, true);
+                        }
+                    }
+                }, redraw);
+            }, false);
+        `;
+
         // Create container for the chart
         return <View style={[
             this.props.styles,
@@ -126,17 +138,18 @@ export default class HighchartsReactNative extends React.PureComponent {
         ]}
         >
             <WebView
-                ref={(webView) => this.webView = webView}
+                ref = "webview"
                 source={highchartsLayout}
-                injectedJavaScript={this.addHighchartsScripts()}
+                injectedJavaScript={runFirst}
                 originWhitelist={["*"]}
                 automaticallyAdjustContentInsets={true}
                 allowFileAccess={true}
                 javaScriptEnabled={true}
                 domStorageEnabled={true}
-                scalesPageToFit={true}
+                useWebKit={true}
                 scrollEnabled={false}
                 mixedContentMode='always'
+                allowFileAccessFromFileURLs={true}
             />
         </View>;
     }
