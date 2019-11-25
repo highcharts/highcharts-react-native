@@ -23,14 +23,14 @@ export default class HighchartsReactNative extends React.PureComponent {
         }
 
         // extract width and height from user styles
-        const userStyles = StyleSheet.flatten(this.props.styles);
+        const userStyles = StyleSheet.flatten(props.styles);
 
         this.state = {
             width: userStyles.width || win.width,
             height: userStyles.height || win.height,
-            chartOptions: this.props.options,
-            useCDN: this.props.useCDN || false,
-            modules: this.props.modules && this.props.modules.toString() || []
+            chartOptions: props.options,
+            useCDN: props.useCDN || false,
+            modules: props.modules && props.modules.toString() || []
         };
 
         // catch rotation event
