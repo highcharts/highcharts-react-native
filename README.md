@@ -306,6 +306,8 @@ Available options:
     callback={chartCallback}
     useSSL={true}
     useCDN={true}
+    data = {'Data to be stored as global variable in Webview'}
+    onMessage = ((message)=> this.onMessage(message))
   />
 ```
 
