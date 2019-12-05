@@ -48,9 +48,17 @@ export default class HighchartsReactNative extends React.PureComponent {
         Dimensions.removeEventListener('change', this.onRotate);
     }
     onRotate() {
+        let width = Dimensions.get('window').width;
+        let height =  Dimensions.get('window').height;
+        if(!!this.props.styles) {
+            const userStyles = StyleSheet.flatten(this.props.styles);
+            const {width: w, height: h} = userStyles;
+            width = w;
+            height = h;
+        }
         this.setState({
-            width: userStyles.width || Dimensions.get('window').width,
-            height: userStyles.height || Dimensions.get('window').height,
+            width: width,
+            height: height,
         });
     }
     /**
