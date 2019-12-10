@@ -19,6 +19,8 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     4. [callback](#callback)
     5. [useSSL](#useSSL)
     6. [useCDN](#useCDN)
+    7. [data](#data)
+    8. [onMessage](#onMessage)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
@@ -341,6 +343,12 @@ Set the flag as true, if you would like to load files (i.e highcharts.js) from C
 ### useSSL
 
 Set the flag as true, if you would like to load files (i.e highcharts.js) by SSL. (The useCDN flag is mandatory).
+
+### data
+Data to be stored as global variable in Webview.
+
+### onMessage
+Global communication between Webview and App.
 
 ## Get repository
 

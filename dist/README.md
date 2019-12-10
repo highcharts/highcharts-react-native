@@ -19,6 +19,8 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     4. [callback](#callback)
     5. [useSSL](#useSSL)
     6. [useCDN](#useCDN)
+    7. [data](#data)
+    8. [onMessage](#onMessage)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
@@ -62,7 +64,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -108,7 +110,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -116,7 +118,7 @@ export default class App extends React.Component {
 
         this.state = {
             chartOptions: {
-            	chart: {
+                chart: {
                     events: {
                         load: function () {
 
@@ -167,7 +169,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 const modules = [
     'highcharts-more',
@@ -224,7 +226,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
     constructor(props) {
@@ -306,6 +308,8 @@ Available options:
     callback={chartCallback}
     useSSL={true}
     useCDN={true}
+    data = {'Data to be stored as global variable in Webview'}
+    onMessage = ((message)=> this.onMessage(message))
   />
 ```
 
@@ -339,6 +343,12 @@ Set the flag as true, if you would like to load files (i.e highcharts.js) from C
 ### useSSL
 
 Set the flag as true, if you would like to load files (i.e highcharts.js) by SSL. (The useCDN flag is mandatory).
+
+### data
+Data to be stored as global variable in Webview.
+
+### onMessage
+Global communication between Webview and App.
 
 ## Get repository
 
