@@ -90,7 +90,7 @@ export default class HighchartsReactNative extends React.PureComponent {
     render() {
         const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
         const runFirst = `
-           
+           window.data = \"${this.props.data ? this.props.data : null}\";
            var modulesList = ${JSON.stringify(this.state.modules)};
 
            if (modulesList.length > 0) {
@@ -147,6 +147,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         >
             <WebView
                 ref = "webview"
+                onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : {}}
                 source={highchartsLayout}
                 injectedJavaScript={runFirst}
                 originWhitelist={["*"]}
