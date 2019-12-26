@@ -21,6 +21,7 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     6. [useCDN](#useCDN)
     7. [data](#data)
     8. [onMessage](#onMessage)
+    9. [loader](#loader)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
@@ -309,7 +310,8 @@ Available options:
     useSSL={true}
     useCDN={true}
     data = {'Data to be stored as global variable in Webview'}
-    onMessage = ((message)=> this.onMessage(message))
+    onMessage = {message => this.onMessage(message)}
+    loader = { true }
   />
 ```
 
@@ -349,6 +351,10 @@ Data to be stored as global variable in Webview.
 
 ### onMessage
 Global communication between Webview and App.
+
+### loader
+
+Set the flag as true, if you would like to show loader while chart is loading
 
 ## Get repository
 
