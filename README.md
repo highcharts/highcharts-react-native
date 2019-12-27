@@ -303,6 +303,7 @@ Available options:
 ```jsx
   <HighchartsReact
     styles={styles}
+    webviewStyles={webviewStyles}
     options={this.state.chartOptions}
     modules={modules}
     callback={chartCallback}
@@ -315,6 +316,9 @@ Available options:
 
 ### styles
 You can style your container using JavaScript like in the regular react and react native.
+
+### webviewStyles
+like styles
 
 ### options
 
