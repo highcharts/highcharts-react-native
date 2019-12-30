@@ -30,7 +30,8 @@ export default class HighchartsReactNative extends React.PureComponent {
             height: userStyles.height || win.height,
             chartOptions: props.options,
             useCDN: props.useCDN || false,
-            modules: props.modules && props.modules.toString() || []
+            modules: props.modules && props.modules.toString() || [],
+            setOptions: props.setOptions || {}
         };
 
         // catch rotation event
@@ -97,6 +98,8 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
     render() {
         const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
+        const setOptions = this.state.setOptions;
+
         const runFirst = `
            window.data = \"${this.props.data ? this.props.data : null}\";
            var modulesList = ${JSON.stringify(this.state.modules)};
@@ -120,6 +123,7 @@ export default class HighchartsReactNative extends React.PureComponent {
                     }
 
                     if (redraw) {
+                        Highcharts.setOptions('${setOptions}');
                         Highcharts.chart("container", ${this.serialize(this.props.options)});
                     }
                 }

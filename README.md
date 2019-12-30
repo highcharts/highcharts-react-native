@@ -14,13 +14,14 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     4. [How to run](#how-to-run)
 2. [Options details](#options-details)
     1. [options](#options)
-    2. [styles](#styles)
-    3. [modules](#modules)
-    4. [callback](#callback)
-    5. [useSSL](#useSSL)
-    6. [useCDN](#useCDN)
-    7. [data](#data)
-    8. [onMessage](#onMessage)
+    2. [setOptions](#setOptions)
+    3. [styles](#styles)
+    4. [modules](#modules)
+    5. [callback](#callback)
+    6. [useSSL](#useSSL)
+    7. [useCDN](#useCDN)
+    8. [data](#data)
+    9. [onMessage](#onMessage)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
@@ -319,6 +320,27 @@ You can style your container using JavaScript like in the regular react and reac
 ### options
 
 Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is required.
+
+### setOptions
+
+Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is optional.
+
+```js
+const setOptions={
+    // Language object. The language object is global and it can't be set on each chart initialization. Instead, use Highcharts.setOptions to set it before any chart is initialized.
+    lang: {
+        months: [
+            'Janvier', 'Février', 'Mars', 'Avril',
+            'Mai', 'Juin', 'Juillet', 'Août',
+            'Septembre', 'Octobre', 'Novembre', 'Décembre'
+        ],
+        weekdays: [
+            'Dimanche', 'Lundi', 'Mardi', 'Mercredi',
+            'Jeudi', 'Vendredi', 'Samedi'
+        ]
+    }
+}
+```
 
 ### modules
 List of modules which should be added to Highcharts. I.e when you would like to setup `solidgauge` series which requires `highcharts-more` and `solid-gauge` files, you should declare array:
