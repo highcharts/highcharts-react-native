@@ -21,6 +21,9 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     6. [useCDN](#useCDN)
     7. [data](#data)
     8. [onMessage](#onMessage)
+    9. [loader](#loader)
+    10. [webviewStyles](#webviewStyles)
+    11. [setOptions](#setOptions)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
@@ -303,13 +306,15 @@ Available options:
 ```jsx
   <HighchartsReact
     styles={styles}
+    webviewStyles={webviewStyles}
     options={this.state.chartOptions}
     modules={modules}
     callback={chartCallback}
     useSSL={true}
     useCDN={true}
     data = {'Data to be stored as global variable in Webview'}
-    onMessage = ((message)=> this.onMessage(message))
+    onMessage = {message => this.onMessage(message)}
+    loader = { true }
   />
 ```
 
@@ -349,6 +354,36 @@ Data to be stored as global variable in Webview.
 
 ### onMessage
 Global communication between Webview and App.
+
+### loader
+
+Set the flag as true, if you would like to show loader while chart is loading.
+
+### webviewStyles
+
+You can style your webview using JavaScript like in the regular react and react native.
+
+### setOptions
+
+Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is optional.
+
+```js
+const setOptions={
+    // Language object. The language object is global and it can't be set on each chart initialization. Instead, use Highcharts.setOptions to set it before any chart is initialized.
+    lang: {
+        months: [
+            'Janvier', 'Février', 'Mars', 'Avril',
+            'Mai', 'Juin', 'Juillet', 'Août',
+            'Septembre', 'Octobre', 'Novembre', 'Décembre'
+        ],
+        weekdays: [
+            'Dimanche', 'Lundi', 'Mardi', 'Mercredi',
+            'Jeudi', 'Vendredi', 'Samedi'
+        ]
+    }
+}
+```
+
 
 ## Get repository
 
