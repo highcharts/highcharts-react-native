@@ -167,6 +167,7 @@ export default class HighchartsReactNative extends React.PureComponent {
                 scrollEnabled={false}
                 mixedContentMode='always'
                 allowFileAccessFromFileURLs={true}
+                startInLoadingState = {this.props.loader}
             />
         </View>;
     }
