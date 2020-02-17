@@ -383,7 +383,8 @@ const setOptions={
     }
 }
 ```
-
+### devPort
+When you use EXPO in DEV mode, you may to declare address and port to actually load the html file in Android. You cannot use build-in `file:///` when using expo because the android and ios folders don’t exist yet. When it’s in STAGING or PROD skip this option and use default the `file:///android_asset` path.
 
 ## Get repository
 

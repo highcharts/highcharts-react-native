@@ -11,7 +11,8 @@ import { WebView } from 'react-native-webview';
 const win = Dimensions.get('window');
 const cdnPath = 'code.highcharts.com/';
 const path = '../highcharts-files/';
-const highchartsLayout = (Platform.OS == 'ios') ? require('../highcharts-layout/index.html') : { uri: 'file:///android_asset/highcharts-layout/index.html' }
+const devPath = 'file://';
+let highchartsLayout;
 let httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
@@ -21,6 +22,9 @@ export default class HighchartsReactNative extends React.PureComponent {
         if (props.useSSL) {
             httpProto = 'https://';
         }
+
+        highchartsLayout = (Platform.OS == 'ios') ? 
+            require('../highcharts-layout/index.html') : { uri: (props.devPath || 'file://') + '/android_asset/highcharts-layout/index.html' };
 
         // extract width and height from user styles
         const userStyles = StyleSheet.flatten(props.styles);

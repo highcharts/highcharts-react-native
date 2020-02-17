@@ -24,6 +24,7 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     9. [loader](#loader)
     10. [webviewStyles](#webviewStyles)
     11. [setOptions](#setOptions)
+    12. [devPort](#devPort)
 3. [Get repository](#get-repository)
 4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
@@ -312,9 +313,10 @@ Available options:
     callback={chartCallback}
     useSSL={true}
     useCDN={true}
-    data = {'Data to be stored as global variable in Webview'}
-    onMessage = {message => this.onMessage(message)}
-    loader = { true }
+    data={'Data to be stored as global variable in Webview'}
+    onMessage={message => this.onMessage(message)}
+    loader={ true }
+    devPort={'xxx.xxx.xxx.xxx:xxxxx'} // i.e 192.168.0.1:12345
   />
 ```
 
@@ -367,6 +369,7 @@ You can style your webview using JavaScript like in the regular react and react 
 
 Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is optional.
 
+
 ```js
 const setOptions={
     // Language object. The language object is global and it can't be set on each chart initialization. Instead, use Highcharts.setOptions to set it before any chart is initialized.
@@ -384,6 +387,8 @@ const setOptions={
 }
 ```
 
+### devPort
+When you use EXPO in DEV mode, you may to declare address and port to actually load the html file in Android. You cannot use build-in `file:///` when using expo because the android and ios folders don’t exist yet. When it’s in STAGING or PROD skip this option and use default the `file:///android_asset` path.
 
 ## Get repository
 

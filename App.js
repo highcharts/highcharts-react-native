@@ -19,7 +19,7 @@ export default class App extends React.Component {
             chartOptions: {
                 series: [{
                     name: 'Speed',
-                    data: [1, 10, 3]
+                    data: [10, 10, 3]
                 }],
                 chart: {
                     type: 'line'
@@ -46,6 +46,7 @@ export default class App extends React.Component {
                     //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
+                    devPath={'192.168.0.1:12345'}
                     //useSSL={true}
                     //modules={modules}
                 />
