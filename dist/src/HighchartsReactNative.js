@@ -16,6 +16,20 @@ let highchartsLayout;
 let httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
+    static getDerivedStateFromProps(props, state) {
+        let width = Dimensions.get('window').width;
+        let height =  Dimensions.get('window').height;
+        if(!!props.styles) {
+            const userStyles = StyleSheet.flatten(props.styles);
+            const {width: w, height: h} = userStyles;
+            width = w;
+            height = h;
+        }
+        return {
+            width: width,
+            height: height,
+        };
+    }
     constructor(props) {
         super(props);
 
