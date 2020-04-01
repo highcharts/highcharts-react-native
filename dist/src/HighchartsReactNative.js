@@ -163,7 +163,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         >
             <WebView
                 ref={ref => {this.webviewRef = ref}}
-                onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : {}}
+                onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
                 source={highchartsLayout}
                 injectedJavaScript={runFirst}
                 originWhitelist={["*"]}
