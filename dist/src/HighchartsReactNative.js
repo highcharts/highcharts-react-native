@@ -38,12 +38,13 @@ export default class HighchartsReactNative extends React.PureComponent {
             setOptions: props.setOptions || {}
         };
 
+        this.webviewRef = null
+
         // catch rotation event
         this.onRotate = this.onRotate.bind(this);
     }
     componentDidUpdate() {
-        const { webview } = this.refs;
-        webview.postMessage(this.serialize(this.props.options, true));
+        this.webviewRef && this.webviewRef.postMessage(this.serialize(this.props.options, true));
     }
     componentDidMount() {
         // catch rotation event
@@ -161,7 +162,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         ]}
         >
             <WebView
-                ref = "webview"
+                ref={ref => {this.webviewRef = ref}}
                 onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : {}}
                 source={highchartsLayout}
                 injectedJavaScript={runFirst}
