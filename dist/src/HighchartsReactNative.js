@@ -128,6 +128,7 @@ export default class HighchartsReactNative extends React.PureComponent {
 
                     if (redraw) {
                         Highcharts.setOptions('${setOptions}');
+
                         Highcharts.chart("container", ${this.serialize(this.props.options)});
                     }
                 }
