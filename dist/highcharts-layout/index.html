@@ -31,14 +31,20 @@
 		// Communication between React app and webview. Receive chart options as string.
 		document.addEventListener('message', function (data) {
 		    Highcharts.charts[0].update(
-		        hcUtils.parseOptions(data.data)
-		    );
+				hcUtils.parseOptions(data.data),
+				true,
+				true,
+				true
+			);
 		});
 
 		window.addEventListener('message', function (data) {
 		    Highcharts.charts[0].update(
-		        hcUtils.parseOptions(data.data)
-		    );
+				hcUtils.parseOptions(data.data),
+				true,
+				true,
+				true
+			);
 		});
    	</script>
   </head>
