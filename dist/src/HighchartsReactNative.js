@@ -53,33 +53,9 @@ export default class HighchartsReactNative extends React.PureComponent {
         };
 
         this.webviewRef = null
-
-        // catch rotation event
-        this.onRotate = this.onRotate.bind(this);
     }
     componentDidUpdate() {
         this.webviewRef && this.webviewRef.postMessage(this.serialize(this.props.options, true));
-    }
-    componentDidMount() {
-        // catch rotation event
-        Dimensions.addEventListener('change', this.onRotate);
-    }
-    componentWillUnmount() {
-        Dimensions.removeEventListener('change', this.onRotate);
-    }
-    onRotate() {
-        let width = Dimensions.get('window').width;
-        let height =  Dimensions.get('window').height;
-        if(!!this.props.styles) {
-            const userStyles = StyleSheet.flatten(this.props.styles);
-            const {width: w, height: h} = userStyles;
-            width = w;
-            height = h;
-        }
-        this.setState({
-            width: width,
-            height: height,
-        });
     }
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
