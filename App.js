@@ -1,65 +1,31 @@
-import React from 'react';
+import * as React from 'react';
 import {
-    StyleSheet,
-    Text,
-    View,
-    Button
+  Text,
+  View,
+  StyleSheet,
+  Platform
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/highcharts-react-native';
-
-const modules = [
-    //'solid-gauge'
-];
-
+import {
+  WebView
+} from 'react-native-webview';
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            chartOptions: {
-                series: [{
-                    name: 'Speed',
-                    data: [10, 10, 3]
-                }],
-                chart: {
-                    type: 'line'
-                }
-            }
-        };
+  render() {
+    return <WebView source = {
+      {
+        uri: 'https://www.wp.pl'
+      }
     }
-
-    chartUpdate() {
-        this.setState({
-            chartOptions: {
-                title: {
-                    text: 'Updated chart'
-                }
-            }
-        });
+    style = {
+      styles.container
     }
-
-    render() {
-        return (
-            <View>              
-                
-                <HighchartsReactNative
-                    //useCDN={true}
-                    styles={styles.container}
-                    options={this.state.chartOptions}
-                    devPath={'192.168.0.1:12345'}
-                    //useSSL={true}
-                    //modules={modules}
-                />
-            </View>
-        );
-    }
+    />;
+  }
 }
-
 const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center'
-    },
-    button: {
-        justifyContent: 'center'
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
