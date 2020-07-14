@@ -1,23 +1,36 @@
 import * as React from 'react';
 import {
-  Text,
-  View,
-  StyleSheet,
-  Platform
+  StyleSheet
 } from 'react-native';
 import {
   WebView
 } from 'react-native-webview';
+
 export default class App extends React.Component {
+
   render() {
-    return <WebView source = {
-      {
-        uri: 'https://www.wp.pl'
-      }
-    }
-    style = {
-      styles.container
-    }
+
+    const runFirst = `
+      alert("aaa123");
+    `;
+
+    return <WebView
+        source={{ html: `<br><br><br><h1>Hello world!</h1>` }}
+        style={ styles.container }
+        onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
+        injectedJavaScript={runFirst}
+        ref={ref => {this.webviewRef = ref}}
+        originWhitelist={["*"]}
+        automaticallyAdjustContentInsets={true}
+        allowFileAccess={true}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        useWebKit={true}
+        scrollEnabled={false}
+        mixedContentMode='always'
+        allowFileAccessFromFileURLs={true}
+        //startInLoadingState = {this.props.loader}
+        javaScriptEnabledAndroid={true}
     />;
   }
 }
