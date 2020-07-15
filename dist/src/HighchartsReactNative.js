@@ -7,10 +7,12 @@ import {
     Platform
 } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { documentDirectory } from 'expo-file-system'
+import { Asset } from 'expo-asset';
 
 const win = Dimensions.get('window');
 const cdnPath = 'code.highcharts.com/';
-const path = '../highcharts-files/';
+const path = documentDirectory + '/dist/highcharts-files/';
 const devPath = 'file://';
 let highchartsLayout;
 let httpProto = 'http://';
@@ -30,6 +32,16 @@ export default class HighchartsReactNative extends React.PureComponent {
             height: height,
         };
     }
+
+    setLayout = async () => {
+        const indexHtml = Asset.fromModule(require('../highcharts-layout/index.html'))
+
+        await indexHtml.downloadAsync()
+        this.setState({
+            layoutHTML: indexHtml.localUri
+        })
+    }
+
     constructor(props) {
         super(props);
 
@@ -37,8 +49,8 @@ export default class HighchartsReactNative extends React.PureComponent {
             httpProto = 'https://';
         }
 
-        highchartsLayout = (Platform.OS == 'ios') ? 
-            require('../highcharts-layout/index.html') : { uri: (props.devPath || 'file://') + '/android_asset/highcharts-layout/index.html' };
+        // Download the main layout html with chart container
+        this.setLayout()
 
         // extract width and height from user styles
         const userStyles = StyleSheet.flatten(props.styles);
@@ -49,13 +61,17 @@ export default class HighchartsReactNative extends React.PureComponent {
             chartOptions: props.options,
             useCDN: props.useCDN || false,
             modules: props.modules && props.modules.toString() || [],
-            setOptions: props.setOptions || {}
+            setOptions: props.setOptions || {},
+            renderedOnce: false
         };
 
         this.webviewRef = null
     }
     componentDidUpdate() {
         this.webviewRef && this.webviewRef.postMessage(this.serialize(this.props.options, true));
+    }
+    componentDidMount() {
+        this.setState({ renderedOnce: true });
     }
     /**
      * Convert JSON to string. When is updated, functions (like events.load) 
@@ -123,8 +139,10 @@ export default class HighchartsReactNative extends React.PureComponent {
                     }
                 }
               };
+
+
               xhttp.open("GET", '${scriptsPath}' + (isModule ? 'modules/' + file : file) + '.js', true);
-              xhttp.send();
+               xhttp.send();
             }
 
             loadScripts('highcharts', function () {
@@ -147,28 +165,35 @@ export default class HighchartsReactNative extends React.PureComponent {
         `;
 
         // Create container for the chart
-        return <View style={[
-            this.props.styles,
-            { width: this.state.width, height: this.state.height }
-        ]}
-        >
-            <WebView
-                ref={ref => {this.webviewRef = ref}}
-                onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
-                source={highchartsLayout}
-                injectedJavaScript={runFirst}
-                originWhitelist={["*"]}
-                automaticallyAdjustContentInsets={true}
-                allowFileAccess={true}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                useWebKit={true}
-                scrollEnabled={false}
-                mixedContentMode='always'
-                allowFileAccessFromFileURLs={true}
-                startInLoadingState = {this.props.loader}
-                style={this.props.webviewStyles}
-            />
-        </View>;
+        return (
+            <View
+                style={[
+                    this.props.styles,
+                    { width: this.state.width, height: this.state.height }
+                ]}
+            >
+                <WebView
+                    ref={ref => {this.webviewRef = ref}}
+                    onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
+                    source = {
+                        this.state.renderedOnce ? {
+                            uri: this.state.layoutHTML
+                        } : undefined
+                    }
+                    injectedJavaScript={runFirst}
+                    originWhitelist={["*"]}
+                    automaticallyAdjustContentInsets={true}
+                    allowFileAccess={true}
+                    javaScriptEnabled={true}
+                    domStorageEnabled={true}
+                    useWebKit={true}
+                    scrollEnabled={false}
+                    mixedContentMode='always'
+                    allowFileAccessFromFileURLs={true}
+                    startInLoadingState = {this.props.loader}
+                    style={this.props.webviewStyles}
+                />
+            </View>
+        )
     }
 }

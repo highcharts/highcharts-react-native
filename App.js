@@ -43,7 +43,7 @@ export default class App extends React.Component {
         return (
             <View style={ styles.container }>
                 <HighchartsReactNative
-                    useCDN={true}
+                    //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
                     //devPath={'192.168.0.77:19000'}
