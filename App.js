@@ -1,44 +1,66 @@
-import * as React from 'react';
+import React from 'react';
 import {
-  StyleSheet
+    StyleSheet,
+    Text,
+    View,
+    Button
 } from 'react-native';
-import {
-  WebView
-} from 'react-native-webview';
+import { WebView } from 'react-native-webview';
+import HighchartsReactNative from './dist/src/HighchartsReactNative';
+
+const modules = [
+    //'solid-gauge'
+];
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
 
-  render() {
+        this.state = {
+            chartOptions: {
+                series: [{
+                    name: 'Speed',
+                    data: [1110, 10, 3]
+                }],
+                chart: {
+                    type: 'line'
+                }
+            }
+        };
+    }
 
-    const runFirst = `
-      alert("aaa123");
-    `;
+    chartUpdate() {
+        this.setState({
+            chartOptions: {
+                title: {
+                    text: 'Updated chart'
+                }
+            }
+        });
+    }
 
-    return <WebView
-        source={{ html: `<br><br><br><h1>Hello world!</h1>` }}
-        style={ styles.container }
-        onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
-        injectedJavaScript={runFirst}
-        ref={ref => {this.webviewRef = ref}}
-        originWhitelist={["*"]}
-        automaticallyAdjustContentInsets={true}
-        allowFileAccess={true}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        useWebKit={true}
-        scrollEnabled={false}
-        mixedContentMode='always'
-        allowFileAccessFromFileURLs={true}
-        //startInLoadingState = {this.props.loader}
-        javaScriptEnabledAndroid={true}
-    />;
-  }
+    render() {
+        return (
+            <View style={ styles.container }>
+                <HighchartsReactNative
+                    useCDN={true}
+                    styles={styles.container}
+                    options={this.state.chartOptions}
+                    //devPath={'192.168.0.77:19000'}
+                    useSSL={true}
+                    //modules={modules}
+                />
+            </View>
+        );
+    }
 }
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        justifyContent: 'center',
+        flex: 1
+    },
+    button: {
+        justifyContent: 'center'
+    }
 });
