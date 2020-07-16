@@ -15,7 +15,7 @@ module.exports = (async () => {
       },
       resolver: {
         sourceExts,
-        assetExts: [...assetExts, 'css'],
+        assetExts: [...assetExts, 'hcscript'],
       },
   }
 })()

@@ -7,14 +7,11 @@ import {
     Platform
 } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { documentDirectory } from 'expo-file-system'
-import { Asset } from 'expo-asset';
+import { Asset, FileSystem } from 'react-native-unimodules';
 
 const win = Dimensions.get('window');
 const cdnPath = 'code.highcharts.com/';
-const path = documentDirectory + '/dist/highcharts-files/';
-const devPath = 'file://';
-let highchartsLayout;
+const path = FileSystem.documentDirectory + 'dist/highcharts-files/highcharts.js';
 let httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
@@ -33,12 +30,32 @@ export default class HighchartsReactNative extends React.PureComponent {
         };
     }
 
-    setLayout = async () => {
-        const indexHtml = Asset.fromModule(require('../highcharts-layout/index.html'))
+    getHighchartsAssets = async () => {
+        await this.setLayout()
+        await this.getScript()
 
-        await indexHtml.downloadAsync()
         this.setState({
-            layoutHTML: indexHtml.localUri
+            assetsDownloaded: true
+        })
+    }
+
+    setLayout = async () => {
+        const indexHtml = Asset.fromModule(require('./index.html'))
+        await indexHtml.downloadAsync()
+        const htmlString = await FileSystem.readAsStringAsync(indexHtml.localUri)
+        return await this.setState({
+            layoutHTML: htmlString
+        })
+    }
+
+    getScript = async () => {
+        let script = Asset.fromModule(require('./highcharts.hcscript'))
+
+        await script.downloadAsync()
+        
+        const inline = await FileSystem.readAsStringAsync(script.localUri)
+        return await this.setState({
+            highchartsInline: inline
         })
     }
 
@@ -49,8 +66,7 @@ export default class HighchartsReactNative extends React.PureComponent {
             httpProto = 'https://';
         }
 
-        // Download the main layout html with chart container
-        this.setLayout()
+        this.getHighchartsAssets()
 
         // extract width and height from user styles
         const userStyles = StyleSheet.flatten(props.styles);
@@ -64,7 +80,6 @@ export default class HighchartsReactNative extends React.PureComponent {
             setOptions: props.setOptions || {},
             renderedOnce: false
         };
-
         this.webviewRef = null
     }
     componentDidUpdate() {
@@ -108,92 +123,88 @@ export default class HighchartsReactNative extends React.PureComponent {
         return serializedOptions;
     }
     render() {
-        const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
-        const setOptions = this.state.setOptions;
-        const runFirst = `
-           window.data = \"${this.props.data ? this.props.data : null}\";
-           var modulesList = ${JSON.stringify(this.state.modules)};
+        if (this.state.assetsDownloaded) {
+            const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
+            const setOptions = this.state.setOptions;
+            const runFirst = `
+                window.data = \"${this.props.data ? this.props.data : null}\";
+                var modulesList = ${JSON.stringify(this.state.modules)};
 
-           if (modulesList.length > 0) {
-              modulesList = modulesList.split(',');
-           }
-
-           function loadScripts(file, callback, redraw, isModule) {
-
-              var xhttp = new XMLHttpRequest();
-              xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    
-                    var hcScript = document.createElement('script');
-                    hcScript.innerHTML = this.responseText;
-                    document.body.appendChild(hcScript);
-
-                    if (callback) {
-                        callback.call();
-                    }
-
-                    if (redraw) {
-                        Highcharts.setOptions('${this.serialize(setOptions)}');
-
-                        Highcharts.chart("container", ${this.serialize(this.props.options)});
-                    }
+                if (modulesList.length > 0) {
+                    modulesList = modulesList.split(',');
                 }
-              };
+                var hcScript = document.createElement('script')
+                hcScript.innerHTML = ${this.state.highchartsInline}
 
+                document.body.appendChild(hcScript);
 
-              xhttp.open("GET", '${scriptsPath}' + (isModule ? 'modules/' + file : file) + '.js', true);
-               xhttp.send();
-            }
+                Highcharts.setOptions('${this.serialize(setOptions)}');
 
-            loadScripts('highcharts', function () {
+                Highcharts.chart("container", ${this.serialize(this.props.options)});
 
-                var redraw = modulesList.length > 0 ? false : true;
+                    //    function loadScripts(file, callback, redraw, isModule) {
 
-                loadScripts('highcharts-more', function () {
-                    if (modulesList.length > 0) {
-                        for (var i = 0; i < modulesList.length; i++) {
-                            if (i === (modulesList.length - 1)) {
-                                redraw = true;
-                            } else {
-                                redraw = false;
+                    //       var xhttp = new XMLHttpRequest();
+                    //       xhttp.onreadystatechange = function() {
+                    //         if (this.readyState == 4 && this.status == 200) {
+                                
+                    //             var hcScript = document.createElement('script');
+                    //             hcScript.innerHTML = this.responseText;
+                    //             document.body.appendChild(hcScript);
+
+                    //             if (callback) {
+                    //                 callback.call();
+                    //             }
+
+                    //             if (redraw) {
+                    //                 Highcharts.setOptions('${this.serialize(setOptions)}');
+
+                    //                 Highcharts.chart("container", ${this.serialize(this.props.options)});
+                    //             }
+                    //         }
+                    //       };
+
+                    //       xhttp.open("GET", '${scriptsPath}' + (isModule ? 'modules/' + file : file) + '.js', true);
+
+                    //        xhttp.send();
+                    //     }
+
+                    //     loadScripts('highcharts', null, true);
+                `;
+
+            // Create container for the chart
+            return (
+                <View
+                    style={[
+                        this.props.styles,
+                        { width: this.state.width, height: this.state.height }
+                    ]}
+                >
+                    <WebView
+                        ref={ref => {this.webviewRef = ref}}
+                        onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
+                        source = {
+                            {
+                                html: this.state.layoutHTML
                             }
-                            loadScripts(modulesList[i], undefined, redraw, true);
                         }
-                    }
-                }, redraw);
-            }, false);
-        `;
-
-        // Create container for the chart
-        return (
-            <View
-                style={[
-                    this.props.styles,
-                    { width: this.state.width, height: this.state.height }
-                ]}
-            >
-                <WebView
-                    ref={ref => {this.webviewRef = ref}}
-                    onMessage = {this.props.onMessage ? (event) => this.props.onMessage(event.nativeEvent.data) : () => {}}
-                    source = {
-                        this.state.renderedOnce ? {
-                            uri: this.state.layoutHTML
-                        } : undefined
-                    }
-                    injectedJavaScript={runFirst}
-                    originWhitelist={["*"]}
-                    automaticallyAdjustContentInsets={true}
-                    allowFileAccess={true}
-                    javaScriptEnabled={true}
-                    domStorageEnabled={true}
-                    useWebKit={true}
-                    scrollEnabled={false}
-                    mixedContentMode='always'
-                    allowFileAccessFromFileURLs={true}
-                    startInLoadingState = {this.props.loader}
-                    style={this.props.webviewStyles}
-                />
-            </View>
-        )
+                        injectedJavaScript={runFirst}
+                        originWhitelist={["*"]}
+                        automaticallyAdjustContentInsets={true}
+                        allowFileAccess={true}
+                        javaScriptEnabled={true}
+                        domStorageEnabled={true}
+                        useWebKit={true}
+                        scrollEnabled={false}
+                        mixedContentMode='always'
+                        allowFileAccessFromFileURLs={true}
+                        startInLoadingState = {this.props.loader}
+                        style={this.props.webviewStyles}
+                    />
+                </View>
+            )
+        } else {
+            return <View></View>
+        }
     }
 }
