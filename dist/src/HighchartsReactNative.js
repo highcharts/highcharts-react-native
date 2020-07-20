@@ -56,7 +56,7 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
 
     setLayout = async () => {
-        const indexHtml = Asset.fromModule(require('./index.html'))
+        const indexHtml = Asset.fromModule(require('../highcharts-layout/index.html'))
         await indexHtml.downloadAsync()
         const htmlString = await FileSystem.readAsStringAsync(indexHtml.localUri)
         this.setState({
