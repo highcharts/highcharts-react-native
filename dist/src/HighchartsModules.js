@@ -1,0 +1,50 @@
+// It was needed to change extension of all of the below JavaScript Highcharts files
+// into the custom '.hcscript' type, so thath the Metro bundler will treat them all as
+// the Asset instead of common JS file. 
+
+export default {
+    highcharts: require('../highcharts-files/highcharts.hcscript'),
+    'highcharts-more': require('../highcharts-files/highcharts-more.hcscript'),
+    'highcharts-3d': require('../highcharts-files/highcharts-3d.hcscript'),
+    modules: {
+        boost: require('../highcharts-files/modules/boost.hcscript'),
+        'boost-canvas': require('../highcharts-files/modules/boost-canvas.hcscript'),
+        bullet: require('../highcharts-files/modules/bullet.hcscript'),
+        coloraxis: require('../highcharts-files/modules/coloraxis.hcscript'),
+        cylinder: require('../highcharts-files/modules/cylinder.hcscript'),
+        'dependency-wheel': require('../highcharts-files/modules/dependency-wheel.hcscript'),
+        dotplot: require('../highcharts-files/modules/dotplot.hcscript'),
+        drilldown: require('../highcharts-files/modules/drilldown.hcscript'),
+        dumbbell: require('../highcharts-files/modules/dumbbell.hcscript'),
+        exporting: require('../highcharts-files/modules/exporting.hcscript'),
+        'full-screen': require('../highcharts-files/modules/full-screen.hcscript'),
+        funnel: require('../highcharts-files/modules/funnel.hcscript'),
+        funnel3d: require('../highcharts-files/modules/funnel3d.hcscript'),
+        heatmap: require('../highcharts-files/modules/heatmap.hcscript'),
+        'histogram-bellcurve': require('../highcharts-files/modules/histogram-bellcurve.hcscript'),
+        'item-series': require('../highcharts-files/modules/item-series.hcscript'),
+        lollipop: require('../highcharts-files/modules/lollipop.hcscript'),
+        networkgraph: require('../highcharts-files/modules/networkgraph.hcscript'),
+        'no-data-to-display': require('../highcharts-files/modules/no-data-to-display.hcscript'),
+        organization: require('../highcharts-files/modules/organization.hcscript'),
+        'parallel-coordinates': require('../highcharts-files/modules/parallel-coordinates.hcscript'),
+        pareto: require('../highcharts-files/modules/pareto.hcscript'),
+        'pattern-fill': require('../highcharts-files/modules/pattern-fill.hcscript'),
+        pyramid3d: require('../highcharts-files/modules/pyramid3d.hcscript'),
+        sankey: require('../highcharts-files/modules/sankey.hcscript'),
+        'series-label': require('../highcharts-files/modules/series-label.hcscript'),
+        'solid-gauge': require('../highcharts-files/modules/solid-gauge.hcscript'),
+        streamgraph: require('../highcharts-files/modules/streamgraph.hcscript'),
+        sunburst: require('../highcharts-files/modules/sunburst.hcscript'),
+        tilemap: require('../highcharts-files/modules/tilemap.hcscript'),
+        timeline: require('../highcharts-files/modules/timeline.hcscript'),
+        treegrid: require('../highcharts-files/modules/treegrid.hcscript'),
+        'variable-pie': require('../highcharts-files/modules/variable-pie.hcscript'),
+        variwide: require('../highcharts-files/modules/variwide.hcscript'),
+        vector: require('../highcharts-files/modules/vector.hcscript'),
+        venn: require('../highcharts-files/modules/venn.hcscript'),
+        windbarb: require('../highcharts-files/modules/windbarb.hcscript'),
+        wordcloud: require('../highcharts-files/modules/wordcloud.hcscript'),
+        xrange: require('../highcharts-files/modules/xrange.hcscript')
+    }
+}

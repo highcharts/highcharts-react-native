@@ -1,17 +1,18 @@
 import React from 'react';
 import {
-    Text,
     View,
     Dimensions,
     StyleSheet,
-    Platform
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { Asset, FileSystem } from 'react-native-unimodules';
+import HighchartsModules from './HighchartsModules';
 
 const win = Dimensions.get('window');
 const cdnPath = 'code.highcharts.com/';
 const path = FileSystem.documentDirectory + 'dist/highcharts-files/highcharts.js';
+const stringifiedScripts = {};
+
 let httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
@@ -30,32 +31,36 @@ export default class HighchartsReactNative extends React.PureComponent {
         };
     }
 
-    getHighchartsAssets = async () => {
+    getHcAssets = async () => {
         await this.setLayout()
-        await this.getScript()
-
+        await this.getScript('highcharts')
+        for (const mod of this.state.modules) {
+            await this.getScript(mod, true)
+        }
         this.setState({
-            assetsDownloaded: true
+            hcModulesReady: true
         })
+    }
+
+    getScript = async (name, isModule) => {
+        
+        const script = Asset.fromModule(
+            isModule &&
+            name !== 'highcharts-more' &&
+            name !== 'highcharts-3d' ?
+                HighchartsModules.modules[name] : HighchartsModules[name])
+        await script.downloadAsync()
+
+        let inline = await FileSystem.readAsStringAsync(script.localUri)
+        stringifiedScripts[name] = inline
     }
 
     setLayout = async () => {
         const indexHtml = Asset.fromModule(require('./index.html'))
         await indexHtml.downloadAsync()
         const htmlString = await FileSystem.readAsStringAsync(indexHtml.localUri)
-        return await this.setState({
+        this.setState({
             layoutHTML: htmlString
-        })
-    }
-
-    getScript = async () => {
-        let script = Asset.fromModule(require('./highcharts.hcscript'))
-
-        await script.downloadAsync()
-        
-        const inline = await FileSystem.readAsStringAsync(script.localUri)
-        return await this.setState({
-            highchartsInline: inline
         })
     }
 
@@ -66,8 +71,6 @@ export default class HighchartsReactNative extends React.PureComponent {
             httpProto = 'https://';
         }
 
-        this.getHighchartsAssets()
-
         // extract width and height from user styles
         const userStyles = StyleSheet.flatten(props.styles);
 
@@ -76,11 +79,14 @@ export default class HighchartsReactNative extends React.PureComponent {
             height: userStyles.height || win.height,
             chartOptions: props.options,
             useCDN: props.useCDN || false,
-            modules: props.modules && props.modules.toString() || [],
+            modules: props.modules || [],
             setOptions: props.setOptions || {},
-            renderedOnce: false
+            renderedOnce: false,
+            hcModulesReady: false
         };
         this.webviewRef = null
+
+        this.getHcAssets()
     }
     componentDidUpdate() {
         this.webviewRef && this.webviewRef.postMessage(this.serialize(this.props.options, true));
@@ -123,54 +129,45 @@ export default class HighchartsReactNative extends React.PureComponent {
         return serializedOptions;
     }
     render() {
-        if (this.state.assetsDownloaded) {
+        if (this.state.hcModulesReady) {
             const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
             const setOptions = this.state.setOptions;
             const runFirst = `
                 window.data = \"${this.props.data ? this.props.data : null}\";
                 var modulesList = ${JSON.stringify(this.state.modules)};
+                var readable = ${JSON.stringify(stringifiedScripts)}
 
-                if (modulesList.length > 0) {
-                    modulesList = modulesList.split(',');
+                function loadScripts(file, callback, redraw) {
+                    var hcScript = document.createElement('script');
+                    hcScript.innerHTML = readable[file]
+                    document.body.appendChild(hcScript);
+
+                    if (callback) {
+                        callback.call();
+                    }
+
+                    if (redraw) {
+                        Highcharts.setOptions('${this.serialize(setOptions)}');
+                        Highcharts.chart("container", ${this.serialize(this.props.options)});
+                    }
                 }
-                var hcScript = document.createElement('script')
-                hcScript.innerHTML = ${this.state.highchartsInline}
 
-                document.body.appendChild(hcScript);
-
-                Highcharts.setOptions('${this.serialize(setOptions)}');
-
-                Highcharts.chart("container", ${this.serialize(this.props.options)});
-
-                    //    function loadScripts(file, callback, redraw, isModule) {
-
-                    //       var xhttp = new XMLHttpRequest();
-                    //       xhttp.onreadystatechange = function() {
-                    //         if (this.readyState == 4 && this.status == 200) {
-                                
-                    //             var hcScript = document.createElement('script');
-                    //             hcScript.innerHTML = this.responseText;
-                    //             document.body.appendChild(hcScript);
-
-                    //             if (callback) {
-                    //                 callback.call();
-                    //             }
-
-                    //             if (redraw) {
-                    //                 Highcharts.setOptions('${this.serialize(setOptions)}');
-
-                    //                 Highcharts.chart("container", ${this.serialize(this.props.options)});
-                    //             }
-                    //         }
-                    //       };
-
-                    //       xhttp.open("GET", '${scriptsPath}' + (isModule ? 'modules/' + file : file) + '.js', true);
-
-                    //        xhttp.send();
-                    //     }
-
-                    //     loadScripts('highcharts', null, true);
-                `;
+                loadScripts('highcharts', function () {
+                    var redraw = modulesList.length > 0 ? false : true;
+                    loadScripts('highcharts-more', function () {
+                        if (modulesList.length > 0) {
+                            for (var i = 0; i < modulesList.length; i++) {
+                                if (i === (modulesList.length - 1)) {
+                                    redraw = true;
+                                } else {
+                                    redraw = false;
+                                }
+                                loadScripts(modulesList[i], undefined, redraw, true);
+                            }
+                        }
+                    }, redraw);
+                }, false);
+            `;
 
             // Create container for the chart
             return (
