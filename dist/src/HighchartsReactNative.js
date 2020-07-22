@@ -31,27 +31,37 @@ export default class HighchartsReactNative extends React.PureComponent {
         };
     }
 
-    getHcAssets = async () => {
+    getHcAssets = async (useCDN) => {
         await this.setLayout()
-        await this.getScript('highcharts')
+        await this.getScript('highcharts', null, useCDN)
         for (const mod of this.state.modules) {
-            await this.getScript(mod, true)
+            await this.getScript(mod, true, useCDN)
         }
         this.setState({
             hcModulesReady: true
         })
     }
 
-    getScript = async (name, isModule) => {
-        
-        const script = Asset.fromModule(
-            isModule &&
-            name !== 'highcharts-more' &&
-            name !== 'highcharts-3d' ?
-                HighchartsModules.modules[name] : HighchartsModules[name])
-        await script.downloadAsync()
+    getScript = async (name, isModule, useCDN) => {
+        let inline;
 
-        let inline = await FileSystem.readAsStringAsync(script.localUri)
+        if(useCDN) {
+            const response = await fetch(
+                httpProto + cdnPath + (isModule ? 'modules/' : '') + name + '.js'
+            )
+            inline = await response.text()        
+        } else {
+            const script = Asset.fromModule(
+                isModule &&
+                name !== 'highcharts-more' &&
+                name !== 'highcharts-3d' ?
+                HighchartsModules.modules[name] : HighchartsModules[name]
+            )
+
+            await script.downloadAsync()
+            inline = await FileSystem.readAsStringAsync(script.localUri)
+        }
+
         stringifiedScripts[name] = inline
     }
 
@@ -86,7 +96,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         };
         this.webviewRef = null
 
-        this.getHcAssets()
+        this.getHcAssets(this.state.useCDN)
     }
     componentDidUpdate() {
         this.webviewRef && this.webviewRef.postMessage(this.serialize(this.props.options, true));

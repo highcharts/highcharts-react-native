@@ -77,6 +77,16 @@ export default class App extends React.Component {
     chartUpdate() {
         this.setState({
             chartOptions: {
+                chart: {
+                    events: {
+                        load: function() {
+                            var p = document.createElement('p')
+
+                            p.innerHTML = 'ABCD'
+                            document.body.appendChild(p)
+                        }
+                    }
+                },
                 title: {
                     text: 'Updated chart'
                 }
