@@ -2,7 +2,8 @@
 Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
 ## Table of Contents
-1. [Getting started](#getting-started)
+1. [Changelog](#changelog)
+2. [Getting started](#getting-started)
     1. [General prerequisites](#general-prerequisites)
     2. [Installing](#installing)
     3. [Using](#using)
@@ -12,7 +13,7 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
         4. [Highcharts advanced series](#highcharts-advanced-series)
         5. [Optimal way to update](#optimal-way-to-update)
     4. [How to run](#how-to-run)
-2. [Options details](#options-details)
+3. [Options details](#options-details)
     1. [options](#options)
     2. [styles](#styles)
     3. [modules](#modules)
@@ -24,11 +25,17 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     9. [loader](#loader)
     10. [webviewStyles](#webviewStyles)
     11. [setOptions](#setOptions)
-3. [Get repository](#get-repository)
-4. [FAQ](#faq)
+    12. [devPort](#devPort)
+4. [Get repository](#get-repository)
+5. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
     2. [Files are not loaded](#files-are-not-loaded)
     3. [Error loading page](#error-loading-page)
+
+## Changelog
+
+### 3.0
+
 
 ## Getting Started
 
@@ -175,7 +182,6 @@ import {
 import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 const modules = [
-    'highcharts-more',
     'solid-gauge'
 ];
 
@@ -311,10 +317,11 @@ Available options:
     modules={modules}
     callback={chartCallback}
     useSSL={true}
-    useCDN={true}
-    data = {'Data to be stored as global variable in Webview'}
-    onMessage = {message => this.onMessage(message)}
-    loader = { true }
+    useCDN={true} // or string 'mydomain.com/highchartsfiles/'
+    data={'Data to be stored as global variable in Webview'}
+    onMessage={message => this.onMessage(message)}
+    loader={ true }
+    devPort={'xxx.xxx.xxx.xxx:xxxxx'} // i.e 192.168.0.1:12345
   />
 ```
 
@@ -330,7 +337,6 @@ List of modules which should be added to Highcharts. I.e when you would like to 
 
 ```jsx
 const modules = [
-    'highcharts-more',
     'solid-gauge'
 ];
 ```
@@ -343,7 +349,7 @@ A callback function for the created chart. First argument for the function will 
 
 ### useCDN
 
-Set the flag as true, if you would like to load files (i.e highcharts.js) from CDN instead of local file system.
+Set the flag as true, if you would like to load files (i.e highcharts.js) from CDN instead of local file system. You can declare an url to your domain (i.e `mydomain.com/highchartsfiles/)`)
 
 ### useSSL
 

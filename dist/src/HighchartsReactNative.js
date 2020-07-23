@@ -9,10 +9,10 @@ import { Asset, FileSystem } from 'react-native-unimodules';
 import HighchartsModules from './HighchartsModules';
 
 const win = Dimensions.get('window');
-const cdnPath = 'code.highcharts.com/';
 const path = FileSystem.documentDirectory + 'dist/highcharts-files/highcharts.js';
 const stringifiedScripts = {};
 
+let cdnPath = 'code.highcharts.com/';
 let httpProto = 'http://';
 
 export default class HighchartsReactNative extends React.PureComponent {
@@ -27,13 +27,15 @@ export default class HighchartsReactNative extends React.PureComponent {
         }
         return {
             width: width,
-            height: height,
+            height: height
         };
     }
 
     getHcAssets = async (useCDN) => {
         await this.setLayout()
         await this.getScript('highcharts', null, useCDN)
+        await this.getScript('highcharts-more', null, useCDN)
+        await this.getScript('highcharts-3d', null, useCDN)
         for (const mod of this.state.modules) {
             await this.getScript(mod, true, useCDN)
         }
@@ -79,6 +81,10 @@ export default class HighchartsReactNative extends React.PureComponent {
 
         if (props.useSSL) {
             httpProto = 'https://';
+        }
+
+        if (typeof props.useCDN === 'string') {
+            cdnPath = props.useCDN;
         }
 
         // extract width and height from user styles
