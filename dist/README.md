@@ -50,7 +50,7 @@ Tested and required versions:
 * React native 0.59.3+
 
 
-**If you're using this package with Expo Tools, please make sure your `Expo SDK` version is higher than or equal to `v38.0.0`, otherwise use the `v2.2.3` version of this package, which should work from `v33.0.0`**.
+***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
 ### Installing
 
