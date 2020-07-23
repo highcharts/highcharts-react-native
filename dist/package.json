@@ -17,7 +17,8 @@
     "url": "https://github.com/highcharts/highcharts-react-native"
   },
   "contributors": [
-    "Sebastian Bochan <sebastian@blacklabel.pl>"
+    "Sebastian Bochan <sebastian@blacklabel.pl>",
+    "Daniel Studencki <daniel.studencki@blacklabel.pl>"
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "author": "Highcharts",
