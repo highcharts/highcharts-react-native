@@ -1,6 +1,6 @@
 {
   "name": "@highcharts/highcharts-react-native",
-  "version": "2.2.2",
+  "version": "3.0.0-beta",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "contributors": [
     "Sebastian Bochan <sebastian@blacklabel.pl>",
-    "Daniel Studencki <daniel.studencki@blacklabel.pl>"
+    "Daniel Studencki <daniel.studencki@gmail.com>"
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "author": "Highcharts",
