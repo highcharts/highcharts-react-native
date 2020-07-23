@@ -41,13 +41,16 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
 
 ### General prerequisites
 
-Make sure you have **node**, **NPM** and **React** up to date.
+Make sure you have **Node.JS**, **NPM** and **React** up to date.
 Tested and required versions:
 
 * node 11.2+
 * npm 6.7.0+ or similar package manager
 * React 16.4+
 * React native 0.59.3+
+
+
+**If you're using this package with Expo Tools, please make sure your `Expo SDK` version is higher than or equal to `v38.0.0`, otherwise use the `v2.2.3` version of this package, which should work from `v33.0.0`**.
 
 ### Installing
 
@@ -61,7 +64,7 @@ npm install @highcharts/highcharts-react-native
 
 #### Basic usage example
 
-Import into your React Native project and render a chart:
+Import this package into your React Native project and render the chart:
 
 #### Highcharts chart
 
@@ -128,7 +131,7 @@ export default class App extends React.Component {
 
         this.state = {
             chartOptions: {
-                chart: {
+            	chart: {
                     events: {
                         load: function () {
 
@@ -307,7 +310,7 @@ Expo tools allows you to build, deploy, and quickly iterate on native iOS and An
 
 ## Options details
 
-Available options:
+Available properties:
 
 ```jsx
   <HighchartsReact
@@ -322,75 +325,24 @@ Available options:
     onMessage={message => this.onMessage(message)}
     loader={ true }
     devPort={'xxx.xxx.xxx.xxx:xxxxx'} // i.e 192.168.0.1:12345
+    setOptions={highchartsGlobalOptions}
   />
 ```
 
-### styles
-You can style your container using JavaScript like in the regular react and react native.
-
-### options
-
-Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is required.
-
-### modules
-List of modules which should be added to Highcharts. I.e when you would like to setup `solidgauge` series which requires `highcharts-more` and `solid-gauge` files, you should declare array:
-
-```jsx
-const modules = [
-    'solid-gauge'
-];
-```
-
-and set the parameter.
-
-### callback
-
-A callback function for the created chart. First argument for the function will hold the created `chart`. Default `this` in the function points to the `chart`. This option is optional.
-
-### useCDN
-
-Set the flag as true, if you would like to load files (i.e highcharts.js) from CDN instead of local file system. You can declare an url to your domain (i.e `mydomain.com/highchartsfiles/)`)
-
-### useSSL
-
-Set the flag as true, if you would like to load files (i.e highcharts.js) by SSL. (The useCDN flag is mandatory).
-
-### data
-Data to be stored as global variable in Webview.
-
-### onMessage
-Global communication between Webview and App.
-
-### loader
-
-Set the flag as true, if you would like to show loader while chart is loading.
-
-### webviewStyles
-
-You can style your webview using JavaScript like in the regular react and react native.
-
-### setOptions
-
-Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is optional.
-
-```js
-const setOptions={
-    // Language object. The language object is global and it can't be set on each chart initialization. Instead, use Highcharts.setOptions to set it before any chart is initialized.
-    lang: {
-        months: [
-            'Janvier', 'Février', 'Mars', 'Avril',
-            'Mai', 'Juin', 'Juillet', 'Août',
-            'Septembre', 'Octobre', 'Novembre', 'Décembre'
-        ],
-        weekdays: [
-            'Dimanche', 'Lundi', 'Mardi', 'Mercredi',
-            'Jeudi', 'Vendredi', 'Samedi'
-        ]
-    }
-}
-```
-### devPort
-When you use EXPO in DEV mode, you may to declare address and port to actually load the html file in Android. You cannot use build-in `file:///` when using expo because the android and ios folders don’t exist yet. When it’s in STAGING or PROD skip this option and use default the `file:///android_asset` path.
+| Parameter | Type | Required | Description |
+| --------- | :----: | :--------: | ----------- |
+| `styles` | Object | no | You can style your container using JavaScript like in the regular react and react native. |
+| `options` | Object | yes | Highcharts chart configuration object. Please refer to the Highcharts [API documentation](https://api.highcharts.com/highcharts/). This option is required. |
+| `modules` | Array | no | List of modules which should be added to Highcharts. I.e when you would like to setup `solidgauge` series which requires `highcharts-more` and `solid-gauge` files, you should declare array: `const modules = ['solid-gauge']` |
+| `callback` | Function | no | A callback function for the created chart. First argument for the function will hold the created `chart`. Default `this` in the function points to the `chart`. This option is optional. |
+| `useCDN` | Boolean | no | Set the flag as true, if you would like to load files (i.e highcharts.js) from CDN instead of local file system. You can declare an url to your domain (i.e `mydomain.com/highchartsfiles/`) |
+| `useSSL` | Boolean | no | Set the flag as true, if you would like to load files (i.e highcharts.js) by SSL. (The useCDN flag is mandatory). |
+| `data` | any | no | Data to be stored as global variable in Webview. |
+| `onMessage` | Function | no | Global communication between Webview and App. The function takes the message as the first argument. |
+| `loader` | Boolean | no | Set the flag to `true`, if you would like to show loader while chart is loading. |
+| `webviewStyles` | Object | no | You can style your webview using JavaScript object structured like in the regular React and React Native apps. |
+| `setOptions` | Object | no | Options which are set for Highcharts through `Highcharts.setOptions()` method. Usually it is used to set the `global` and `lang` options. For more details please visit [Highcharts documentation](https://api.highcharts.com/class-reference/Highcharts#.setOptions), and [API](https://api.highcharts.com/highcharts/global). |
+| `devPort` | String | no | When using EXPO in DEV mode, you may declare address and port to actually load the html file in Android. You cannot use built-in `file:///` when using Expo,because the Android and iOS folders don’t exist yet. When it’s in STAGING or PROD skip this option and use default the `file:///android_asset` path. |
 
 ## Get repository
 
