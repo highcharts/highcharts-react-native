@@ -1,6 +1,6 @@
 {
   "name": "@highcharts/highcharts-react-native",
-  "version": "3.0.0-beta",
+  "version": "3.0.0",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
