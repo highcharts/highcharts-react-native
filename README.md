@@ -372,4 +372,12 @@ In the `package.json` remove the `"main": "node_modules/expo/AppEntry.js"` line.
 - The way of getting Highcharts javascript files has changed.
 
 Bugfixes: 
-[#39](https://github.com/highcharts/highcharts-react-native/issues/39), [#51](https://github.com/highcharts/highcharts-react-native/issues/51), [#61](https://github.com/highcharts/highcharts-react-native/issues/61), [#67](https://github.com/highcharts/highcharts-react-native/issues/67), [#70](https://github.com/highcharts/highcharts-react-native/issues/70), [#73](https://github.com/highcharts/highcharts-react-native/issues/73), [#82](https://github.com/highcharts/highcharts-react-native/issues/82), [#85](https://github.com/highcharts/highcharts-react-native/issues/85), [#86](https://github.com/highcharts/highcharts-react-native/issues/86)
+- [#39](https://github.com/highcharts/highcharts-react-native/issues/39) - Chart not redering in iOS,
+- [#51](https://github.com/highcharts/highcharts-react-native/issues/51) - Chart not rendering on Android Simulator using EXPO cli,
+- [#61](https://github.com/highcharts/highcharts-react-native/issues/61) - [Error] Element ref was specified as a string but no owner was set.,
+- [#67](https://github.com/highcharts/highcharts-react-native/issues/67) - load event not executing,
+- [#70](https://github.com/highcharts/highcharts-react-native/issues/70) - HighchartsReactNative Not working if expo published,
+- [#73](https://github.com/highcharts/highcharts-react-native/issues/73) - Highchart disappears in landscape mode,
+- [#82](https://github.com/highcharts/highcharts-react-native/issues/82) - Unable to set `backgroundColor` due to old version of `react-native-webview`,
+- [#85](https://github.com/highcharts/highcharts-react-native/issues/85) - Error: Failed to compile,
+- [#86](https://github.com/highcharts/highcharts-react-native/issues/86) - Can't render the chart on Android
