@@ -5,7 +5,6 @@ import {
     View,
     Button
 } from 'react-native';
-import { WebView } from 'react-native-webview';
 import HighchartsReactNative from './dist/src/HighchartsReactNative';
 
 const modules = [
