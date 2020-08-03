@@ -1,16 +1,8 @@
 {
   "expo": {
-    "name": "webview",
-    "slug": "webview",
-    "privacy": "public",
-    "sdkVersion": "33.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "name": "highcharts-react-native",
+    "slug": "highcharts-react-native",
     "version": "1.0.0",
-    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",

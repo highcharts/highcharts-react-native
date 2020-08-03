@@ -5,7 +5,7 @@ import {
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from '@highcharts/highcharts-react-native';
+import HighchartsReactNative from './dist/src/HighchartsReactNative';
 
 const modules = [
     //'solid-gauge'
@@ -17,13 +17,12 @@ export default class App extends React.Component {
 
         this.state = {
             chartOptions: {
+                title: {
+                    text: 'Default title'
+                },
                 series: [{
-                    name: 'Speed',
-                    data: [10, 10, 3]
-                }],
-                chart: {
-                    type: 'line'
-                }
+                    data: [1, 3, 2]
+                }]
             }
         };
     }
@@ -31,6 +30,9 @@ export default class App extends React.Component {
     chartUpdate() {
         this.setState({
             chartOptions: {
+                chart: {
+                    type: 'column'
+                },
                 title: {
                     text: 'Updated chart'
                 }
@@ -40,15 +42,20 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <View>              
-                
+            <View style={ styles.container }>
                 <HighchartsReactNative
-                    //useCDN={true}
+                    useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
-                    devPath={'192.168.0.1:12345'}
+                    //devPath={'192.168.0.1:12345'}
                     //useSSL={true}
                     //modules={modules}
+                />
+                <Button
+                    onPress={this.chartUpdate.bind(this)}
+                    style={styles.button}
+                    title='Chart update'
+                    color='#000'
                 />
             </View>
         );
@@ -57,7 +64,8 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     },
     button: {
         justifyContent: 'center'

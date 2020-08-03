@@ -2,5 +2,16 @@ node_modules/**/*
 .expo/*
 npm-debug.*
 
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
 package-lock.json
 yarn.lock
+
+# macOS
+.DS_Store
