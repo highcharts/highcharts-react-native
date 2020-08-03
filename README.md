@@ -2,8 +2,7 @@
 Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
 ## Table of Contents
-1. [Changelog](#changelog)
-2. [Getting started](#getting-started)
+1. [Getting started](#getting-started)
     1. [General prerequisites](#general-prerequisites)
     2. [Installing](#installing)
     3. [Using](#using)
@@ -13,7 +12,7 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
         4. [Highcharts advanced series](#highcharts-advanced-series)
         5. [Optimal way to update](#optimal-way-to-update)
     4. [How to run](#how-to-run)
-3. [Options details](#options-details)
+2. [Options details](#options-details)
     1. [options](#options)
     2. [styles](#styles)
     3. [modules](#modules)
@@ -26,16 +25,12 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
     10. [webviewStyles](#webviewStyles)
     11. [setOptions](#setOptions)
     12. [devPort](#devPort)
-4. [Get repository](#get-repository)
-5. [FAQ](#faq)
+3. [Get repository](#get-repository)
+4. [FAQ](#faq)
     1. [Where to look for help?](#where-to-look-for-help)
     2. [Files are not loaded](#files-are-not-loaded)
     3. [Error loading page](#error-loading-page)
-
-## Changelog
-
-### 3.0
-
+5. [Changelog](#changelog)
 
 ## Getting Started
 
@@ -370,3 +365,11 @@ run `react-native run-android --variant=release`
 
 ### Error loading page
 In the `package.json` remove the `"main": "node_modules/expo/AppEntry.js"` line.
+
+## Changelog
+
+### 3.0
+- The way of getting Highcharts javascript files has changed.
+
+Bugfixes: 
+[#39](https://github.com/highcharts/highcharts-react-native/issues/39), [#51](https://github.com/highcharts/highcharts-react-native/issues/51), [#61](https://github.com/highcharts/highcharts-react-native/issues/61), [#67](https://github.com/highcharts/highcharts-react-native/issues/67), [#70](https://github.com/highcharts/highcharts-react-native/issues/70), [#73](https://github.com/highcharts/highcharts-react-native/issues/73), [#82](https://github.com/highcharts/highcharts-react-native/issues/82), [#85](https://github.com/highcharts/highcharts-react-native/issues/85), [#86](https://github.com/highcharts/highcharts-react-native/issues/86)
