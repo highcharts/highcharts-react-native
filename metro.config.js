@@ -17,5 +17,5 @@ module.exports = (async () => {
         sourceExts,
         assetExts: [...assetExts, 'hcscript']
       }
-  }
+    }
 })()
