@@ -41,9 +41,12 @@ Tested and required versions:
 
 * node 11.2+
 * npm 6.7.0+ or similar package manager
+
+Packages which should be installed within your project:
 * React 16.4+
 * React native 0.59.3+
-
+* `react-native-webview` 9.4.0+
+* `metro-config` 0.60.0+
 
 ***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
@@ -54,6 +57,33 @@ Get package from NPM in your React app:
 ```bash
 npm install @highcharts/highcharts-react-native
 ```
+
+It is required to add the `.hcscript` into the asset extensions section of `metro.config.js` file, or create that file within your project, and configure it like below:
+```js
+const {getDefaultConfig} = require('metro-config');
+
+module.exports = (async () => {
+  const {
+      resolver: { sourceExts, assetExts }
+  } = await getDefaultConfig()
+  return {
+      transformer: {
+          getTransformOptions: async () => ({
+              transform: {
+                  experimentalImportSupport: false,
+                  inlineRequires: false
+              }
+          })
+      },
+      resolver: {
+        sourceExts,
+        assetExts: [...assetExts, 'hcscript']
+      }
+    }
+})()
+```
+
+*Note: The `metro-config` package have to be installed in order to use this wrapper.*
 
 ### Using
 

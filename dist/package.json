@@ -25,7 +25,8 @@
   "peerDependencies": {
     "react": "~16.11.0",
     "react-native-unimodules": "^0.10.1",
-    "react-native-webview": "^9.4.0"
+    "react-native-webview": "^9.4.0",
+    "metro-config": "^0.60.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
