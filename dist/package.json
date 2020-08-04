@@ -1,6 +1,6 @@
 {
   "name": "@highcharts/highcharts-react-native",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
@@ -22,6 +22,11 @@
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "author": "Highcharts",
+  "peerDependencies": {
+    "react": "~16.11.0",
+    "react-native-unimodules": "^0.10.1",
+    "react-native-webview": "^9.4.0"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",
