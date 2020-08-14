@@ -217,7 +217,12 @@ export default class HighchartsReactNative extends React.PureComponent {
                 </View>
             )
         } else {
-            return <View></View>
+            return this.props.loadingComponent ? this.props.loadingComponent() : (
+                <View style={[
+                    this.props.styles,
+                    { width: this.state.width, height: this.state.height }
+                ]}></View>
+            )
         }
     }
 }
