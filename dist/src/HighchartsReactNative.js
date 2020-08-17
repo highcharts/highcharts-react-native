@@ -32,16 +32,20 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
 
     getHcAssets = async (useCDN) => {
-        await this.setLayout()
-        await this.getScript('highcharts', null, useCDN)
-        await this.getScript('highcharts-more', null, useCDN)
-        await this.getScript('highcharts-3d', null, useCDN)
-        for (const mod of this.state.modules) {
-            await this.getScript(mod, true, useCDN)
+        try {
+            await this.setLayout()
+            await this.getScript('highcharts', null, useCDN)
+            await this.getScript('highcharts-more', null, useCDN)
+            await this.getScript('highcharts-3d', null, useCDN)
+            for (const mod of this.state.modules) {
+                await this.getScript(mod, true, useCDN)
+            }
+            this.setState({
+                hcModulesReady: true
+            })
+        } catch (error) {
+            console.error("Failed to fetch scripts or layout. " + error.message)
         }
-        this.setState({
-            hcModulesReady: true
-        })
     }
 
     getScript = async (name, isModule, useCDN) => {
@@ -50,7 +54,9 @@ export default class HighchartsReactNative extends React.PureComponent {
         if(useCDN) {
             const response = await fetch(
                 httpProto + cdnPath + (isModule ? 'modules/' : '') + name + '.js'
-            )
+            ).catch((error) => {
+                throw error
+            })
             inline = await response.text()        
         } else {
             const script = Asset.fromModule(
