@@ -11,7 +11,6 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
         3. [Highcharts live data update](#highcharts-live-data-update)
         4. [Highcharts advanced series](#highcharts-advanced-series)
         5. [Optimal way to update](#optimal-way-to-update)
-    4. [How to run](#how-to-run)
 2. [Options details](#options-details)
     1. [options](#options)
     2. [styles](#styles)
@@ -43,10 +42,8 @@ Tested and required versions:
 * npm 6.7.0+ or similar package manager
 
 Packages which should be installed within your project:
-* React 16.4+
-* React native 0.59.3+
-* `react-native-webview` 9.4.0+
-* `metro-config` 0.60.0+
+* React `>=16.4+`
+* React Native `>=0.63.2`
 
 ***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
@@ -57,6 +54,8 @@ Get package from NPM in your React app:
 ```bash
 npm install @highcharts/highcharts-react-native
 ```
+
+You can either install this wrapper within app based on [Expo tools](https://expo.io/learn), or bare [React Native](https://facebook.github.io/react-native/docs/getting-started) app.
 
 It is required to add the `.hcscript` into the asset extensions section of `metro.config.js` file, or create that file within your project, and configure it like below:
 ```js
@@ -82,10 +81,7 @@ module.exports = (async () => {
     }
 })()
 ```
-
-*Note: The `metro-config` package have to be installed in order to use this wrapper.*
-
-### Using
+### Usage
 
 #### Basic usage example
 
@@ -95,13 +91,7 @@ Import this package into your React Native project and render the chart:
 
 ```jsx
 import React from 'react';
-import {
-    StyleSheet,
-    WebView,
-    Text,
-    View,
-    Button
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
@@ -119,7 +109,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <HighchartsReactNative
                     styles={styles.container}
                     options={this.state.chartOptions}
@@ -132,7 +122,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     }
 });
 ```
@@ -141,13 +132,7 @@ const styles = StyleSheet.create({
 
 ```jsx
 import React from 'react';
-import {
-    StyleSheet,
-    WebView,
-    Text,
-    View,
-    Button
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 export default class App extends React.Component {
@@ -156,7 +141,7 @@ export default class App extends React.Component {
 
         this.state = {
             chartOptions: {
-            	chart: {
+                chart: {
                     events: {
                         load: function () {
 
@@ -178,7 +163,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <HighchartsReactNative
                     styles={styles.container}
                     options={this.state.chartOptions}
@@ -191,22 +176,17 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     }
 });
 ```
 
-### Highcharts advanced series
+### Using Highcharts modules e.g solid-gauge, drilldown, or exporting
 
 ```jsx
 import React from 'react';
-import {
-    StyleSheet,
-    WebView,
-    Text,
-    View,
-    Button
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import HighchartsReactNative from '@highcharts/highcharts-react-native'
 
 const modules = [
@@ -231,7 +211,7 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <HighchartsReactNative
                     styles={styles.container}
                     options={this.state.chartOptions}
@@ -245,7 +225,8 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     }
 });
 ```
@@ -258,8 +239,6 @@ A good practice is to keep all chart options in the state. When `setState` is ca
 import React from 'react';
 import {
     StyleSheet,
-    WebView,
-    Text,
     View,
     Button
 } from 'react-native';
@@ -303,14 +282,13 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <HighchartsReactNative
                     styles={styles.container}
                     options={this.state.chartOptions}
                 />
                 <Button
                     onPress={this.chartUpdate.bind(this)}
-                    style={styles.button}
                     title='Chart update'
                     color='#000'
                 />
@@ -323,16 +301,11 @@ const styles = StyleSheet.create({
     container: {
         height: 200,
         backgroundColor: '#fff',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     }
 });
 ```
-### How to run
-Expo tools allows you to build, deploy, and quickly iterate on native iOS and Android apps from the same JavaScript codebase.
-
-* Official website: [expo.io](https://expo.io/learn)
-* React native getting started: [facebook.github.io/react-native/](https://facebook.github.io/react-native/docs/getting-started)
-
 ## Options details
 
 Available properties:

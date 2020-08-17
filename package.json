@@ -31,26 +31,21 @@
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "dependencies": {
-    "@expo/metro-config": "^0.1.16",
     "expo": "~38.0.8",
-    "expo-asset": "~8.1.7",
-    "expo-file-system": "~9.0.1",
-    "expo-status-bar": "^1.0.2",
-    "gulp": "^4.0.2",
-    "gulp-clean": "^0.4.0",
-    "gulp-remove-files": "^0.0.3",
-    "gulp-rename": "^2.0.0",
-    "metro-config": "^0.60.0",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-    "react-native-unimodules": "^0.10.1",
     "react-native-web": "~0.11.7",
-    "react-native-webview": "9.4.0"
+    "react-native-webview": "10.6.0",
+    "@highcharts/highcharts-react-native": "./dist/"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "babel-preset-expo": "~8.1.0"
+    "babel-preset-expo": "~8.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-remove-files": "^0.0.3",
+    "gulp-rename": "^2.0.0"
   },
   "private": true
 }

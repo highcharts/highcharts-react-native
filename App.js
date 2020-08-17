@@ -1,11 +1,10 @@
 import React from 'react';
 import {
     StyleSheet,
-    Text,
     View,
     Button
 } from 'react-native';
-import HighchartsReactNative from './dist/src/HighchartsReactNative';
+import HighchartsReactNative from '@highcharts/highcharts-react-native';
 
 const modules = [
     //'solid-gauge'
@@ -44,12 +43,12 @@ export default class App extends React.Component {
         return (
             <View style={ styles.container }>
                 <HighchartsReactNative
-                    useCDN={true}
+                    //useCDN={true}
                     styles={styles.container}
                     options={this.state.chartOptions}
-                    //devPath={'192.168.0.1:12345'}
+                    devPath={'192.168.0.1:12345'}
                     //useSSL={true}
-                    //modules={modules}
+                    modules={modules}
                 />
                 <Button
                     onPress={this.chartUpdate.bind(this)}

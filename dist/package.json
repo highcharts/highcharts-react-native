@@ -6,6 +6,11 @@
     "type": "git",
     "url": "git+https://github.com/highcharts/highcharts-react-native-official.git"
   },
+  "dependencies": {
+    "metro-config": "^0.60.0",
+    "react-native-unimodules": "^0.10.1",
+    "react-native-webview": "^10.6.0"
+  },
   "keywords": [
     "highcharts",
     "highstock",
@@ -24,9 +29,7 @@
   "author": "Highcharts",
   "peerDependencies": {
     "react": "~16.11.0",
-    "react-native-unimodules": "^0.10.1",
-    "react-native-webview": "^9.4.0",
-    "metro-config": "^0.60.0"
+    "react-native": "^0.63.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
