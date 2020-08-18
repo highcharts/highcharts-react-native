@@ -8,8 +8,7 @@
   },
   "dependencies": {
     "metro-config": "^0.60.0",
-    "react-native-unimodules": "^0.10.1",
-    "react-native-webview": "^10.6.0"
+    "react-native-unimodules": "^0.10.1"
   },
   "keywords": [
     "highcharts",
@@ -29,7 +28,8 @@
   "author": "Highcharts",
   "peerDependencies": {
     "react": "~16.11.0",
-    "react-native": "^0.63.2"
+    "react-native": "^0.63.2",
+    "react-native-webview": "^10.6.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
