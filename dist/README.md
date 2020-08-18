@@ -44,6 +44,7 @@ Tested and required versions:
 Packages which should be installed within your project:
 * React `>=16.4+`
 * React Native `>=0.63.2`
+* React Native Webview `>=10.6.0`
 
 ***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
