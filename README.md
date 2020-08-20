@@ -48,6 +48,8 @@ Packages which should be installed within your project:
 
 ***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
+***In bare Ract Native application you need to also install the `react-native-unimodules` package, and configure the content of `ios` and `android` build directiories like it's described [here](https://docs.expo.io/bare/installing-unimodules/#installation).***
+
 ### Installing
 
 Get package from NPM in your React app:
@@ -385,3 +387,24 @@ Bugfixes:
 - [#82](https://github.com/highcharts/highcharts-react-native/issues/82) - Unable to set `backgroundColor` due to old version of `react-native-webview`,
 - [#85](https://github.com/highcharts/highcharts-react-native/issues/85) - Error: Failed to compile,
 - [#86](https://github.com/highcharts/highcharts-react-native/issues/86) - Can't render the chart on Android
+
+### 3.0.1
+- Moved the `react`, `react-native-unimodules`, `react-native-webview` packages into `peerDependencies`.
+- Docs improved
+
+### 3.1.0
+- The `package.json` cleaned-up, unused dependencies removed.
+- Unhandled promise rejections resolved
+- Docs improved
+
+Bugfixes:
+- [#91](https://github.com/highcharts/highcharts-react-native/issues/91) - Error expo without expo and no charts
+
+### 3.1.1:
+- Restored the `react-native-webview` back into the `peerDependencies`.
+- Docs improved
+
+### 3.1.2
+- Docs improved
+Bugfixes:
+- [#92] - Charts sometimes fail to render
