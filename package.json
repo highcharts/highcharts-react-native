@@ -1,11 +1,14 @@
 {
-  "main": "node_modules/expo/AppEntry.js",
   "name": "@highcharts/highcharts-react-native",
-  "version": "1.0.0",
+  "version": "3.1.2",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/highcharts/highcharts-react-native-official.git"
+  },
+  "dependencies": {
+    "metro-config": "^0.60.0",
+    "react-native-unimodules": "^0.10.1"
   },
   "keywords": [
     "highcharts",
@@ -18,10 +21,16 @@
     "url": "https://github.com/highcharts/highcharts-react-native"
   },
   "contributors": [
-    "Sebastian Bochan <sebastian@blacklabel.pl>"
+    "Sebastian Bochan <sebastian@blacklabel.pl>",
+    "Daniel Studencki <daniel.studencki@gmail.com>"
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "author": "Highcharts",
+  "peerDependencies": {
+    "react": "~16.11.0",
+    "react-native": "^0.63.2",
+    "react-native-webview": "^10.6.0"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",

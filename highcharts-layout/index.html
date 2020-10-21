@@ -1,14 +1,35 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<style>
+		#container {
+			width:100%;
+			height:100%;
+			top:0;
+			left:0;
+			right:0;
+			bottom:0;
+			position:absolute;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		* {
+		    -webkit-touch-callout: none;
+		    -webkit-user-select: none; /* Disable selection/copy in UIWebView */
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+	</style>
     <script>
 		const hcUtils = {
 		    // convert string to JSON, including functions.
 		    parseOptions: function (chartOptions) {
 		        const parseFunction = this.parseFunction;
 
-		        var options = JSON.parse(chartOptions, function (val, key) {
+		        const options = JSON.parse(chartOptions, function (val, key) {
 		            if (typeof key === 'string' && key.indexOf('function') > -1) {
 		                return parseFunction(key);
 		            } else {
@@ -21,7 +42,7 @@
 		    // convert funtion string to function
 		    parseFunction: function (fc) {
 
-		        var fcArgs = fc.match(/\((.*?)\)/)[1],
+		        const fcArgs = fc.match(/\((.*?)\)/)[1],
 		            fcbody = fc.split('{');
 
 		        return new Function(fcArgs, '{' + fcbody.slice(1).join('{'));
@@ -31,18 +52,24 @@
 		// Communication between React app and webview. Receive chart options as string.
 		document.addEventListener('message', function (data) {
 		    Highcharts.charts[0].update(
-		        hcUtils.parseOptions(data.data)
-		    );
+				hcUtils.parseOptions(data.data),
+				true,
+				true,
+				true
+			);
 		});
 
 		window.addEventListener('message', function (data) {
 		    Highcharts.charts[0].update(
-		        hcUtils.parseOptions(data.data)
-		    );
+				hcUtils.parseOptions(data.data),
+				true,
+				true,
+				true
+			);
 		});
    	</script>
   </head>
   <body>
-    <div id="container"></div>
+  	<div id="container"></div>
   </body>
 </html>
