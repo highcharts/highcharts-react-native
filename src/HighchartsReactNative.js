@@ -49,6 +49,10 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
 
     getAssetAsString = async (asset) => {
+        if (!__DEV__) {
+            return await FileSystem.readAsStringAsync(asset.uri);
+        }
+
         const downloadedModules = await FileSystem.readDirectoryAsync(FileSystem.cacheDirectory)
         let fileName = 'ExponentAsset-' + asset.hash + '.' + asset.type
 
@@ -74,7 +78,8 @@ export default class HighchartsReactNative extends React.PureComponent {
                     name !== 'highcharts-3d' ?
                     HighchartsModules.modules[name] : HighchartsModules[name]
             )
-            stringifiedScripts[name] = await FileSystem.readAsStringAsync(script.uri)
+
+            stringifiedScripts[name] = await this.getAssetAsString(script)
         }
     }
 
@@ -82,7 +87,7 @@ export default class HighchartsReactNative extends React.PureComponent {
         const indexHtml = Asset.fromModule(require('../highcharts-layout/index.html'))
 
         this.setState({
-            layoutHTML: await FileSystem.readAsStringAsync(indexHtml.uri)
+            layoutHTML: await this.getAssetAsString(indexHtml)
         })
     }
 
