@@ -163,8 +163,9 @@ export default class HighchartsReactNative extends React.PureComponent {
         if (this.state.hcModulesReady) {
             const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
             const setOptions = this.state.setOptions;
+            const windowData = `window.data = \"${this.props.data ? this.props.data : null}\"`;
             const runFirst = `
-                window.data = \"${this.props.data ? this.props.data : null}\";
+                ${windowData}
                 var modulesList = ${JSON.stringify(this.state.modules)};
                 var readable = ${JSON.stringify(stringifiedScripts)}
 
@@ -200,6 +201,10 @@ export default class HighchartsReactNative extends React.PureComponent {
                 }, false);
             `;
 
+            // https://github.com/react-native-webview/react-native-webview/blob/master/docs/Guide.md#the-injectjavascript-method
+            if (this.webviewRef) {
+                this.webviewRef.injectJavaScript(windowData)
+            }
             // Create container for the chart
             return (
                 <View
