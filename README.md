@@ -5,7 +5,7 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
 1. [Getting started](#getting-started)
     1. [General prerequisites](#general-prerequisites)
     2. [Installing](#installing)
-    3. [Using](#using)
+    3. [Usage](#usage)
         1. [Basic usage example](#basic-usage-example)
         2. [Highcharts chart](#highchart-chart)
         3. [Highcharts live data update](#highcharts-live-data-update)
