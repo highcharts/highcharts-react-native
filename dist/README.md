@@ -1,3 +1,9 @@
+# Deprecation disclaimer
+
+*This project is no longer actively maintained*
+
+As of 01.01.2021, The React Native wrapper is no longer maintained by Highsoft. The repository will remain available, but we can not guarantee that it will work as intended with future releases of both React Native itself, or Highcharts.
+
 # Highcharts React Native
 Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Native.
 
