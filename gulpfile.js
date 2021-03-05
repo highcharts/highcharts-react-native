@@ -1,31 +1,28 @@
 const rename = require('gulp-rename');
 const gulp = require('gulp');
-const removeFiles = require('gulp-remove-files');
+const del = require('del');
+const filePaths = require('./dist/src/HighchartsModules.js');
 
-const filePath = './dist/highcharts-files/';
+const destinationPath = './dist/highcharts-files/';
 
-gulp.task('default', async function () {
-    
-    // rename
-    gulp.src(filePath + '*.js')
-        .pipe(rename(function (path) {
-            path.extname = '.hcscript';
-        }))
-        .pipe(gulp.dest(filePath));
-    
-    // remove duplicates
-    gulp.src(filePath + '*.js')
-        .pipe(removeFiles());
+gulp.task('update-highcharts', async function() {
+    const CORE_FILES_PATH = 'node_modules/highcharts/';
 
-    // rename modules
-    gulp.src(filePath + 'modules/*.js')
-        .pipe(rename(function (path) {
-            path.extname = ".hcscript";
-        }))
-        .pipe(gulp.dest(filePath + 'modules/'));
+    const moduleFiles = Object.keys(filePaths.modules).map(
+        file => CORE_FILES_PATH + 'modules/' + file + '.js'
+    );
 
-    // remove duplicates of modules
-    gulp.src(filePath + 'modules/*.js')
-        .pipe(removeFiles());
+    // clear destination directory
+    del([destinationPath + '*']);
 
+    gulp.src([
+        CORE_FILES_PATH + 'highcharts.js',
+        CORE_FILES_PATH + 'highcharts-more.js',
+        CORE_FILES_PATH + 'highcharts-3d.js',
+        ...moduleFiles
+    ], {base: './node_modules/highcharts/'})
+        // rename files
+        .pipe(rename({ extname: '.hcscript'}))
+        // copy them into the destination directory
+        .pipe(gulp.dest(destinationPath));
 });

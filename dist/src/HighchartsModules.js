@@ -2,7 +2,7 @@
 // into the custom '.hcscript' type, so thath the Metro bundler will treat them all as
 // the Asset instead of common JS file. 
 
-export default {
+module.exports = {
     highcharts: require('../highcharts-files/highcharts.hcscript'),
     'highcharts-more': require('../highcharts-files/highcharts-more.hcscript'),
     'highcharts-3d': require('../highcharts-files/highcharts-3d.hcscript'),

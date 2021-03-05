@@ -11,7 +11,8 @@ Official minimal [Highcharts](https://www.highcharts.com/) wrapper for React Nat
 1. [Getting started](#getting-started)
     1. [General prerequisites](#general-prerequisites)
     2. [Installing](#installing)
-    3. [Using](#using)
+    3. [Updating Highcharts package](#updating-highcharts=package)
+    4. [Usage](#usage)
         1. [Basic usage example](#basic-usage-example)
         2. [Highcharts chart](#highchart-chart)
         3. [Highcharts live data update](#highcharts-live-data-update)
@@ -54,7 +55,7 @@ Packages which should be installed within your project:
 
 ***If you're using this package with Expo Tools, please make sure your  `Expo SDK`  version is higher than or equal to  `v38.0.0`, otherwise use the  `v2.2.3`  version of this package, which should work from  `v33.0.0`.***
 
-***In bare Ract Native application you need to also install the `react-native-unimodules` package, and configure the content of `ios` and `android` build directiories like it's described [here](https://docs.expo.io/bare/installing-unimodules/#installation).***
+***In bare React Native application you need to also install the `react-native-unimodules` package, and configure the content of `ios` and `android` build directiories like it's described [here](https://docs.expo.io/bare/installing-unimodules/#installation).***
 
 ### Installing
 
@@ -89,6 +90,18 @@ module.exports = (async () => {
       }
     }
 })()
+```
+### Updating Highcharts package
+
+Since this package has been deprecated, we decided to meet our users' needs and created the `update-highcharts` script, which will get the latest Highcharts release and replace source files used by this wrapper, and let the community keep developing the `highcharts-react-native` package.
+
+In order to run the update process, please run the following commands in this package directory:
+```bash
+npm i
+```
+and then
+```bash
+npm run update-highcharts
 ```
 ### Usage
 
