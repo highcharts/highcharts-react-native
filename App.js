@@ -16,6 +16,13 @@ export default class App extends React.Component {
 
         this.state = {
             chartOptions: {
+                chart: {
+                    events: {
+                        load() {
+                            alert(window.Highcharts.version)
+                        }
+                    }
+                },
                 title: {
                     text: 'Default title'
                 },
