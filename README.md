@@ -361,6 +361,7 @@ Available properties:
 | `onMessage` | Function | no | Global communication between Webview and App. The function takes the message as the first argument. |
 | `loader` | Boolean | no | Set the flag to `true`, if you would like to show loader while chart is loading. |
 | `webviewStyles` | Object | no | You can style your webview using JavaScript object structured like in the regular React and React Native apps. |
+| `webviewProps` | Object | no | You can pass webview props. |
 | `setOptions` | Object | no | Options which are set for Highcharts through `Highcharts.setOptions()` method. Usually it is used to set the `global` and `lang` options. For more details please visit [Highcharts documentation](https://api.highcharts.com/class-reference/Highcharts#.setOptions), and [API](https://api.highcharts.com/highcharts/global). |
 | `devPort` | String | no | When using EXPO in DEV mode, you may declare address and port to actually load the html file in Android. You cannot use built-in `file:///` when using Expo,because the Android and iOS folders don’t exist yet. When it’s in STAGING or PROD skip this option and use default the `file:///android_asset` path. |
 
