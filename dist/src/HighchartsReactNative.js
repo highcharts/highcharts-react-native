@@ -9,7 +9,6 @@ import { Asset, FileSystem } from 'react-native-unimodules';
 import HighchartsModules from './HighchartsModules';
 
 const win = Dimensions.get('window');
-const path = FileSystem.documentDirectory + 'dist/highcharts-files/highcharts.js';
 const stringifiedScripts = {};
 
 let cdnPath = 'code.highcharts.com/';
@@ -156,7 +155,6 @@ export default class HighchartsReactNative extends React.PureComponent {
     }
     render() {
         if (this.state.hcModulesReady) {
-            const scriptsPath = this.state.useCDN ? httpProto.concat(cdnPath) : path;
             const setOptions = this.state.setOptions;
             const runFirst = `
                 window.data = \"${this.props.data ? this.props.data : null}\";

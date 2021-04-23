@@ -24,6 +24,8 @@ module.exports = {
         'histogram-bellcurve': require('../highcharts-files/modules/histogram-bellcurve.hcscript'),
         'item-series': require('../highcharts-files/modules/item-series.hcscript'),
         lollipop: require('../highcharts-files/modules/lollipop.hcscript'),
+        moment: require('../highcharts-files/modules/moment.hcscript'),
+        'moment-timezone': require('../highcharts-files/modules/moment-timezone.hcscript'),
         networkgraph: require('../highcharts-files/modules/networkgraph.hcscript'),
         'no-data-to-display': require('../highcharts-files/modules/no-data-to-display.hcscript'),
         organization: require('../highcharts-files/modules/organization.hcscript'),
