@@ -32,7 +32,7 @@
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "dependencies": {
-    "expo": "~38.0.8",
+    "expo": "~46.0.0",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
