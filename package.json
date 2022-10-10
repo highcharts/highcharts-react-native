@@ -1,5 +1,5 @@
 {
-  "main": "./dist/index.js",
+  "main": "index.js",
   "name": "highcharts-react-native",
   "version": "3.1.7",
   "scripts": {
