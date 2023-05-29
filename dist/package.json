@@ -1,6 +1,6 @@
 {
   "name": "@highcharts/highcharts-react-native",
-  "version": "3.1.7",
+  "version": "0.68.7",
   "license": "SEE LICENSE IN <LICENSE>",
   "repository": {
     "type": "git",
@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "metro-config": "^0.60.0",
-    "react-native-unimodules": "^0.10.1"
+    "expo-asset": "^8.5.0",
+    "expo-file-system": "^14.0.0"
   },
   "keywords": [
     "highcharts",
@@ -27,16 +28,16 @@
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "author": "Highcharts",
   "peerDependencies": {
-    "react": "~16.11.0",
-    "react-native": "^0.63.2",
-    "react-native-webview": "^10.6.0"
+    "react": "^17.0.0",
+    "react-native": "^0.68.0",
+    "react-native-webview": "^11.22.6"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",
-    "react": "^16.4.0",
+    "react": "^17.0.0",
     "react-addons-test-utils": "^15.6.2",
-    "react-dom": "^16.4.0",
+    "react-dom": "^17.0.0",
     "react-test-renderer": "^16.4.0",
     "react-unit": "^3.0.0"
   }
