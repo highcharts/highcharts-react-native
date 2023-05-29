@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "name": "highcharts-react-native",
-  "version": "3.1.7",
+  "version": "0.68.7",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -32,12 +32,12 @@
   ],
   "homepage": "https://github.com/highcharts/highcharts-react-native#readme",
   "dependencies": {
-    "expo": "~38.0.8",
-    "react": "~16.11.0",
-    "react-dom": "~16.11.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
-    "react-native-web": "~0.11.7",
-    "react-native-webview": "10.6.0",
+    "expo": "~45.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-native": "^0.68.0",
+    "react-native-web": "*",
+    "react-native-webview": "^11.22.6",
     "@highcharts/highcharts-react-native": "./dist/"
   },
   "devDependencies": {
