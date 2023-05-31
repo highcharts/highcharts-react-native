@@ -37,7 +37,7 @@
     "react-native": "^0.68.0",
     "react-native-web": "0.17.7",
     "react-native-webview": "^11.22.6",
-    "@highcharts/highcharts-react-native": "file:./dist/"
+    "@highcharts/highcharts-react-native": "./dist/"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
