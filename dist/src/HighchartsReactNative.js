@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Dimensions, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
-import FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system';
 import { Asset } from 'expo-asset';
 import HighchartsModules from './HighchartsModules';
 
